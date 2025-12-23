@@ -2,229 +2,256 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Faysal Ahmed - Portfolio</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Faysal Ahmed | Lead IT Engineer & Product Leader</title>
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="stylev2.css" />
 </head>
 
-<body class="bg-gray-100 font-sans">
-    <!-- Hero Section -->
-    <section class="bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-10 my-10">
-        <div class="container mx-auto px-4">
-            <div class="flex flex-col items-center text-center">
-                <h1 class="text-4xl md:text-5xl font-bold mb-4">Faysal Ahmed</h1>
-                <p class="text-xl mb-6">Technology Leader | Product Management Enthusiast</p>
-                <div class="flex space-x-4">
-                    <a href="mailto:faysal.ahmed833@gmail.com" class="hover:text-gray-200"><i
-                            class="fas fa-envelope"></i></a>
-                    <a href="https://www.linkedin.com/in/faysalahmedshohel/" target="_blank"
-                        class="hover:text-gray-200"><i class="fab fa-linkedin"></i></a>
-                    <a href="tel:+8801403574368" class="hover:text-gray-200"><i class="fas fa-phone"></i></a>
-                </div>
-                <nav
-                    class="fixed top-0 h-12 left-1/2 transform -translate-x-1/2 w-full flex justify-center space-x-4 mt-0 p-4 bg-green-700 bg-opacity-50">
-                    <a href="#about" class="hover:text-gray-200">About</a>
-                    <a href="#experience" class="hover:text-gray-200">Experience</a>
-                    <a href="#skills" class="hover:text-gray-200">Skills</a>
-                    <a href="#education" class="hover:text-gray-200">Education & Certifications</a>
-                </nav>
-            </div>
+<body>
+
+  <nav class="navbar">
+    <div class="nav-brand">Faysal Ahmed</div>
+
+    <button class="hamburger" aria-label="Toggle navigation" onclick="toggleMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <div class="nav-links" id="navLinks">
+      <a href="#home" onclick="closeMenu()">Home</a>
+      <a href="#about" onclick="closeMenu()">About</a>
+      <a href="#skills" onclick="closeMenu()">Skills</a>
+      <a href="#experience" onclick="closeMenu()">Experience</a>
+      <a href="#projects" onclick="closeMenu()">Projects</a>
+      <a href="#contact" onclick="closeMenu()">Contact</a>
+    </div>
+  </nav>
+
+
+  <header id="home">
+    <div class="hero" data-aos="fade-up">
+      <div>
+        <div style="float: left;">
+          <img src="assets/images/1760964115914.IMG_20251020_184141_663.jpg" alt="Faysal Ahmed" class="hero-photo"
+            loading="lazy" />
+
+        </div>
+        <div style="float:right">
+          <h1>FAYSAL AHMED</h1>
+          <p>Career: Engineer → Tech Lead → Head of Product → Engineering Manager → Backend Lead → Lead IT (current)</p>
+          <p><strong>Average tenure ~14 months • Consistent 1–2 level promotions</strong></p>
+          <div class="contact-info">
+            faysal.ahmed833@gmail.com • +8801403574368 •
+          </div>
+
         </div>
 
-    </section>
 
-    <!-- Project Section -->
-    <!-- <section class="py-16" id="projects">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold mb-12 text-center text-gray-800">Projects</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <h3 class="text-xl font-semibold mb-4 text-gray-800">Running Projects</h3>
-                    <p class="text-gray-600">
-                        <li>Internal Project 1 at GhorerBazar</li>
-                        <li>Internal Project 2 at GhorerBazar</li>
-                    </p>
-                </div>
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <h3 class="text-xl font-semibold mb-4 text-gray-800">Upcoming Projects</h3>
-                    <p class="text-gray-600">No upcoming projects</p>
-                </div>
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <h3 class="text-xl font-semibold mb-4 text-gray-800">Past Projects</h3>
-                    <p class="text-gray-600">
-                        <li></li>
-                    </p>
-                </div>
-            </div>
+        <div class="social-links" style="margin: 2rem 0;">
+          <a href="https://www.linkedin.com/in/faysalahmedshohel/" target="_blank"
+            style="color:#c084fc; margin:0 15px; font-size:1.4rem;" aria-label="LinkedIn">
+            <i class="fab fa-linkedin-in linkedin-icon">Linkedin</i>
+          </a>
+          <a href="https://github.com/FaysalAhmed" target="_blank"
+            style="color:#c084fc; margin:0 15px; font-size:1.4rem;" aria-label="GitHub">
+            <i class="fab fa-github">Github</i>
+          </a>
+          <a href="https://x.com/ShohelIslam" target="_blank" style="color:#c084fc; margin:0 15px; font-size:1.4rem;"
+            aria-label="Twitter/X">
+            <i class="fab fa-twitter">X(Twitter)</i>
+          </a>
+          <a href="https://www.facebook.com/FaysalAhmedShohel" target="_blank"
+            style="color:#c084fc; margin:0 15px; font-size:1.4rem;" aria-label="Twitter/X">
+            <i class="fab fa-twitter">Facebook</i>
+          </a>
         </div>
-    </section> -->
-
-    <!-- Course Section -->
-    <!-- <section class="py-16" id="courses">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold mb-12 text-center text-gray-800">Courses</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <h3 class="text-xl font-semibold mb-4 text-gray-800">Ongoing Courses</h3>
-                    <p class="text-gray-600">No completed courses</p>
-                </div>
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <h3 class="text-xl font-semibold mb-4 text-gray-800">Upcoming Courses</h3>
-                    <p class="text-gray-600">No ongoing courses</p>
-                </div>
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <h3 class="text-xl font-semibold mb-4 text-gray-800">Past Courses</h3>
-                    <p class="text-gray-600">No past courses</p>
-                </div>
-            </div>
+        <div style="margin-top: 3rem;">
+          <a href="FAYSAL AHMED resume Dec 2 2025 Generic.pdf" class="btn btn-outline" download>Download Resume</a>
         </div>
-    </section> -->
+      </div>
+  </header>
 
-    <!-- About Section -->
-    <section class="py-16" id="about">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold mb-8 text-center text-gray-800">About Me</h2>
-            <div class="max-w-3xl mx-auto text-gray-600">
-                <p class="text-lg leading-relaxed">
-                    Technical leader with 12+ years of experience driving end-to-end development of scalable software
-                    products,
-                    now transitioning to Product Management. Certified in Technical Product Management with proven
-                    expertise
-                    in leading cross-functional teams and delivering measurable business impact. Passionate about
-                    solving
-                    complex problems and driving innovation in fast-paced environments.
-                </p>
-            </div>
-        </div>
-    </section>
+  <section id="about" data-aos="fade-up">
+    <h2>About Me</h2>
+    <div class="card">
+      <p style="font-size:1.25rem; text-align:center; max-width:1000px; margin:0 auto;">
+        Highly accomplished IT leader and Software Engineer with <strong>13+ years</strong> of experience delivering
+        scalable backend systems in E-commerce.
+        Expert in <strong>Node.js, NestJS, NextJS, React, TypeScript, AWS (EKS, Lambda, SQS, etc.)</strong>.
+        Proven ability to lead teams, own product roadmaps, cut costs by 20%+, and consistently earn rapid promotions
+        through strong business impact.
+      </p>
+    </div>
+  </section>
 
+  <section id="skills" data-aos="fade-up">
+    <h2>Core Skills</h2>
+    <div class="skills-grid">
+      <div class="card">
+        <h3>Languages & Frameworks</h3>
+        <p>Node.js • TypeScript • NestJS • NextJS • React • Express • Laravel • FastAPI • GraphQL</p>
+      </div>
+      <div class="card">
+        <h3>Cloud & Architecture</h3>
+        <p>AWS (Lambda, EKS, API Gateway, SQS, RDS, CloudWatch) • Docker • Microservices • CI/CD • Serverless</p>
+      </div>
+      <div class="card">
+        <h3>Databases & Tools</h3>
+        <p>PostgreSQL • Redis • MySQL • Git • Jest • Product Management • Data Analytics</p>
+      </div>
+    </div>
+  </section>
 
+  <section id="experience" data-aos="fade-up">
+    <h2>Experience</h2>
+    <div class="card" id="experience-list">
 
-    <!-- Experience Section -->
-    <section class="bg-gray-200 py-16" id="experience">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold mb-12 text-center text-gray-800">Professional Experience</h2>
-            <div class="space-y-8">
-                <!-- Ghorer Bazar -->
-                <div class="grid grid-cols-2 gap-6 bg-white p-6 rounded-lg shadow-md">
-                    <div class="flex items-center justify-center">
-                        <img src="https://ghorerbazar.com/cdn/shop/files/logo.webp?v=1707766182&width=500"
-                            alt="Ghorer Bazar Logo" class="h-16 w-auto">
-                    </div>
-                    <div>
-                        <h3 class="text-xl font-semibold text-gray-800">Head of Information Technology</h3>
-                        <p class="text-gray-600">Ghorer Bazar | 09/2024 - Present</p>
-                        <ul class="list-disc list-inside mt-2 text-gray-600">
-                            <li>Spearheaded AI-driven personalization features, increasing engagement by 15%</li>
-                            <li>Own IT product roadmap aligning with business goals</li>
-                            <li>Reduced infrastructure costs by 20% using data analytics</li>
-                        </ul>
-                    </div>
-                </div>
-                <!-- BacBon Limited -->
-                <div class="grid grid-cols-2 gap-6 bg-white p-6 rounded-lg shadow-md">
-                    <div class="flex items-center justify-center">
-                        <img src="https://www.bacbonltd.com/images/logo/logo.png" alt="BacBon Logo" class="h-16 w-auto">
-                    </div>
-                    <div>
-                        <h3 class="text-xl font-semibold text-gray-800">Senior Software Engineer</h3>
-                        <p class="text-gray-600">BacBon Limited | 09/2023 - 08/2024</p>
-                        <ul class="list-disc list-inside mt-2 text-gray-600">
-                            <li>Led development of 3 Laravel API products with microservices</li>
-                            <li>Reduced development time by 30% using TDD</li>
-                            <li>Enhanced system efficiency by 25% with Node.js API</li>
-                        </ul>
-                    </div>
-                </div>
-                <!-- Bit Byte Technology -->
-                <div class="grid grid-cols-2 gap-6 bg-white p-6 rounded-lg shadow-md">
-                    <div class="flex items-center justify-center">
-                        <img src="https://bitbytetechnology.com/wp-content/uploads/2025/08/logo.svg" alt="Bitbyte Logo"
-                            class="h-16 w-auto">
-                    </div>
-                    <div>
-                        <h3 class="text-xl font-semibold text-gray-800">Software Engineering Manager</h3>
-                        <p class="text-gray-600">Bit Byte Technology | 09/2022 - 08/2023</p>
-                        <ul class="list-disc list-inside mt-2 text-gray-600">
-                            <li>Led 15-engineer team to deliver travel booking platform</li>
-                            <li>Boosted team productivity by 60%</li>
-                            <li>Reduced bugs by 40% using microservices</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <p class="text-center mt-8 text-gray-600 font-bold">Additional experience available upon request</p>
-        </div>
-    </section>
+      <div class="exp-item">
+        <h3>Lead, Information Technology @ Ghorer Bazar</h3>
+        <small>Sep 2024 – Present • Dhaka</small>
+        <ul>
+          <li>AI personalization with NestJS + NextJS → projected +15% revenue</li>
+          <li>Cut infrastructure costs 20% while scaling rapidly</li>
+          <li>Leading 11-engineer team with 20% productivity gain</li>
+        </ul>
+      </div>
 
-    <!-- Skills Section -->
-    <section class="py-16" id="skills">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold mb-12 text-center text-gray-800">Skills</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <h3 class="text-xl font-semibold mb-4 text-gray-800">Product & Technical</h3>
-                    <p class="text-gray-600">Product Roadmapping, Data Analytics, Node.js, React.js, Laravel, AWS,
-                        Microservices</p>
-                </div>
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <h3 class="text-xl font-semibold mb-4 text-gray-800">Tools</h3>
-                    <p class="text-gray-600">Git, Jest, Cloudwatch, Visual Studio Code</p>
-                </div>
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <h3 class="text-xl font-semibold mb-4 text-gray-800">Soft Skills</h3>
-                    <p class="text-gray-600">Problem-Solving, Stakeholder Collaboration, Team Leadership</p>
-                </div>
-            </div>
-        </div>
-    </section>
+      <div class="exp-item">
+        <h3>Backend Lead @ BacBon Ltd</h3>
+        <small>Sep 2023 – Aug 2024 • Dhaka</small>
+        <ul>
+          <li>3 scalable Laravel microservices handling 40% user surge</li>
+          <li>NestJS auth/notification services @ 150ms latency</li>
+        </ul>
+      </div>
 
-    <!-- Education & Certifications -->
-    <section class="bg-gray-200 py-16" id="education">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold mb-12 text-center text-gray-800">Education & Certifications</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <h3 class="text-xl font-semibold text-gray-800">B.Sc. in Computer Science</h3>
-                    <p class="text-gray-600">Patuakhali Science and Technology University | 2006 - 2010</p>
-                </div>
-                <div class="bg-white p-6 rounded-lg shadow-md">
-                    <h3 class="text-xl font-semibold text-gray-800">Notable Certifications</h3>
-                    <ul class="list-disc list-inside text-gray-600">
-                        <li>Technical Product Management - LinkedIn, 2022</li>
-                        <li>Software Architecture Foundation - LinkedIn, 2022</li>
-                        <li>New Manager Foundations - LinkedIn, 2022</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Go to Top -->
-    <a href="#top"
-        class="fixed bottom-0 right-0 mb-4 mr-4 z-10 bg-white rounded-full p-2 shadow-md hover:shadow-lg transition duration-300"
-        style="display: none;" id="backToTop">
-        <i class="fas fa-arrow-up text-gray-800 text-2xl"></i>
-    </a>
+      <div class="exp-item">
+        <h3>Engineering Manager @ Bit Byte Technology</h3>
+        <small>Sep 2022 – Aug 2023 • Dhaka</small>
+        <ul>
+          <li>Managed 15 engineers • 60% team productivity increase</li>
+          <li>Travel platform with 5,000+ daily bookings on EKS</li>
+        </ul>
+      </div>
 
-    <!-- Footer -->
-    <footer class="bg-gray-800 text-white py-6">
-        <div class="container mx-auto px-4 text-center">
-            <p>&copy; 2025 Faysal Ahmed. All rights reserved.</p>
-        </div>
-    </footer>
-    <script>
-        window.addEventListener("scroll", function () {
-            const backToTopButton = document.getElementById("backToTop");
-            const heroSectionHeight = document.querySelector(".bg-gradient-to-r").offsetHeight;
-            if (window.scrollY > heroSectionHeight) {
-                backToTopButton.style.display = "block";
-            } else {
-                backToTopButton.style.display = "none";
-            }
-        });
-    </script>
+      <div class="exp-item hidden">
+        <h3>Senior Tech Lead @ Apsis Solutions Limited</h3>
+        <small>May 2021 – Apr 2022 • Dhaka</small>
+        <ul>
+          <li>Led 20-person team for e-commerce microservices, achieving 95% customer satisfaction</li>
+          <li>Launched Rasa AI chatbot, improving conversational accuracy by 20%</li>
+        </ul>
+      </div>
+
+      <div class="exp-item hidden">
+        <h3>Senior Full Stack Developer (Team Lead) @ Quantanite</h3>
+        <small>May 2020 – Apr 2021 • Dhaka</small>
+        <ul>
+          <li>Owned development of real-time monitoring tools with Node.js and React.js</li>
+          <li>Optimized customer workflows, reducing turnaround time by 20%</li>
+        </ul>
+      </div>
+
+      <div class="exp-item hidden">
+        <h3>Manager, Software and Product @ HandyMama</h3>
+        <small>May 2019 – Apr 2025 • Dhaka</small>
+        <ul>
+          <li>Developed and launched scalable web products using Laravel and React.js, driving 10% uptick in usage</li>
+          <li>Led 10-person team in adopting serverless architectures on AWS, improving deployment speed by 25%</li>
+        </ul>
+      </div>
+
+      <div class="exp-item hidden">
+        <h3>Software Engineer @ Abridge IT Limited</h3>
+        <small>Jul 2017 – Aug 2018 • Tokyo, Japan</small>
+        <ul>
+          <li>Designed, developed, and tested web applications using Node.js, Vue.js, and Laravel</li>
+          <li>Utilized Unity 3D engine to create immersive and interactive experiences</li>
+        </ul>
+      </div>
+
+      <div class="exp-item hidden">
+        <h3>Software Engineer @ Tiger IT Limited</h3>
+        <small>Apr 2013 – Jun 2017 • Dhaka</small>
+        <ul>
+          <li>Developed and maintained web applications using PHP and Grail frameworks</li>
+          <li>Implemented user interface components and features using C# and WPF</li>
+        </ul>
+      </div>
+
+      <div class="exp-item hidden">
+        <h3>Junior Software Engineer @ Nascenia IT</h3>
+        <small>Jul 2011 – Apr 2012 • Dhaka</small>
+        <ul>
+          <li>Developed and maintained web applications using PHP, WordPress, and Ruby on Rails</li>
+          <li>Implemented responsive design and user interface features</li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="text-align:center; margin-top:2rem;">
+      <button id="show-more-btn" class="btn btn-outline" onclick="toggleExperience()">
+        Show 6 More Experiences
+      </button>
+    </div>
+  </section>
+
+  <section id="projects" data-aos="fade-up">
+    <h2>Featured Projects</h2>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(340px,1fr)); gap:2rem;">
+      <div class="card">
+        <h3>Ghorer Bazar Full Ecosystem</h3>
+        <p>NextJS + NestJS e-commerce platform with AI, ERP, OMS, partial payments</p>
+        <div><span class="tag">NextJS</span><span class="tag">NestJS</span><span class="tag">AWS</span><span
+            class="tag">AI</span></div>
+      </div>
+      <div class="card">
+        <h3>Monarch Mart & Travel Booking</h3>
+        <p>High-traffic system supporting 200% peak spikes</p>
+        <div><span class="tag">EKS</span><span class="tag">Microservices</span><span class="tag">Node.js</span></div>
+      </div>
+      <div class="card">
+        <h3>USAID E-Learning Platform</h3>
+        <p>National-scale Laravel + PostgreSQL education system</p>
+        <div><span class="tag">Laravel</span><span class="tag">Docker</span><span class="tag">JWT</span></div>
+      </div>
+    </div>
+  </section>
+
+  <footer id="contact">
+    <h2>Let's Connect</h2>
+    <p style="font-size:1.4rem; margin:2rem 0;">
+      <a href="mailto:faysal.ahmed833@gmail.com" style="color:#c084fc;">faysal.ahmed833@gmail.com</a> • +8801403574368
+    </p>
+    <div class="social-links" style="margin: 2rem 0;">
+      <a href="https://www.linkedin.com/in/faysalahmedshohel/" target="_blank"
+        style="color:#c084fc; margin:0 15px; font-size:1.4rem;" aria-label="LinkedIn">
+        <i class="fab fa-linkedin-in linkedin-icon">Linkedin</i>
+      </a>
+      <a href="https://github.com/FaysalAhmed" target="_blank" style="color:#c084fc; margin:0 15px; font-size:1.4rem;"
+        aria-label="GitHub">
+        <i class="fab fa-github">Github</i>
+      </a>
+      <a href="https://x.com/ShohelIslam" target="_blank" style="color:#c084fc; margin:0 15px; font-size:1.4rem;"
+        aria-label="Twitter/X">
+        <i class="fab fa-twitter">X(Twitter)</i>
+      </a>
+      <a href="https://www.facebook.com/FaysalAhmedShohel" target="_blank"
+        style="color:#c084fc; margin:0 15px; font-size:1.4rem;" aria-label="Twitter/X">
+        <i class="fab fa-twitter">Facebook</i>
+      </a>
+    </div>
+    <p>© 2025 Faysal Ahmed. Built with passion & code.</p>
+  </footer>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="scriptv2.js"></script>
+
 </body>
 
 </html>
