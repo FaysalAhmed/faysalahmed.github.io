@@ -1,23 +1,18 @@
 <!doctype html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Strategic AI &amp; Executive Leadership — Webbook</title>
-    <link rel="stylesheet" href="../../stylev2.css" />
-    <style>
-        /* Page-specific minor tweaks to align with the project look */
-        .book-hero{padding-top:6rem}
-        .book-title{font-size:2.4rem;margin-bottom:.5rem}
-        .book-subtitle{color:rgba(226,232,240,.85);max-width:900px;margin:0 auto}
-        .toc{max-width:900px;margin:2rem auto}
-        .toc ol{padding-left:1rem}
-    </style>
+    <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
     <nav class="navbar">
         <div class="nav-brand">Webbook</div>
-        <button class="hamburger" aria-label="Toggle navigation" onclick="document.querySelector('.nav-links')?.classList.toggle('active')">
+        <button class="hamburger" aria-label="Toggle navigation"
+            onclick="document.querySelector('.nav-links')?.classList.toggle('active')">
             <span></span><span></span><span></span>
         </button>
         <div class="nav-links">
@@ -27,45 +22,50 @@
     </nav>
 
     <main>
-<header class="book-hero">
-        <h1 class="book-title">Strategic AI &amp; Executive Leadership</h1>
-        <p class="book-subtitle">A concise guide for senior leaders to turn AI into sustained business advantage</p>
-</header>
-<section id="overview" class="book-gist">
-        <p>This concise guide helps executives turn AI from a technical curiosity into sustained business advantage. It covers core AI concepts, data and infrastructure needs, strategy frameworks, product and MLOps practices, and leadership, governance and change management—blending high-level frameworks, practical playbooks and real-world examples to enable fast, accountable decision-making and scalable deployment.</p>
-        <p>Intended audience: senior leaders, product and engineering heads, AI sponsors and program owners who must align strategy, teams and governance to deliver measurable outcomes.</p>
-</section>
-<nav aria-label="Table of contents" class="toc">
-        <h2>Table of contents</h2>
-        <ol>
+        <header class="book-hero">
+            <h1 class="book-title">Strategic AI &amp; Executive Leadership</h1>
+            <p class="book-subtitle">A concise guide for senior leaders to turn AI into sustained business advantage</p>
+        </header>
+        <section id="overview" class="book-gist">
+            <p>This concise guide helps executives turn AI from a technical curiosity into sustained business advantage.
+                It covers core AI concepts, data and infrastructure needs, strategy frameworks, product and MLOps
+                practices, and leadership, governance and change management—blending high-level frameworks, practical
+                playbooks and real-world examples to enable fast, accountable decision-making and scalable deployment.
+            </p>
+            <p>Intended audience: senior leaders, product and engineering heads, AI sponsors and program owners who must
+                align strategy, teams and governance to deliver measurable outcomes.</p>
+        </section>
+        <nav aria-label="Table of contents" class="toc">
+            <h2>Table of contents</h2>
+            <ol>
                 <li><a href="#preface">Preface</a></li>
                 <li><a href="#introduction">Introduction</a></li>
                 <li>Part I: AI Fundamentals
-                        <ol>
-                                <li><a href="#chapter-1">Chapter 1: What is AI?</a></li>
-                                <li><a href="#chapter-2">Chapter 2: Machine Learning &amp; Deep Learning</a></li>
-                                <li><a href="#chapter-3">Chapter 3: Data, Infrastructure &amp; Tools</a></li>
-                        </ol>
+                    <ol>
+                        <li><a href="#chapter-1">Chapter 1: What is AI?</a></li>
+                        <li><a href="#chapter-2">Chapter 2: Machine Learning &amp; Deep Learning</a></li>
+                        <li><a href="#chapter-3">Chapter 3: Data, Infrastructure &amp; Tools</a></li>
+                    </ol>
                 </li>
                 <li>Part II: Strategy &amp; Execution
-                        <ol>
-                                <li><a href="#chapter-4">Chapter 4: AI Strategy Frameworks</a></li>
-                                <li><a href="#chapter-5">Chapter 5: Building AI Products</a></li>
-                                <li><a href="#chapter-6">Chapter 6: Scaling AI &amp; MLOps</a></li>
-                        </ol>
+                    <ol>
+                        <li><a href="#chapter-4">Chapter 4: AI Strategy Frameworks</a></li>
+                        <li><a href="#chapter-5">Chapter 5: Building AI Products</a></li>
+                        <li><a href="#chapter-6">Chapter 6: Scaling AI &amp; MLOps</a></li>
+                    </ol>
                 </li>
                 <li>Part III: Leadership &amp; Governance
-                        <ol>
-                                <li><a href="#chapter-7">Chapter 7: Leading AI Teams</a></li>
-                                <li><a href="#chapter-8">Chapter 8: Ethics, Risk &amp; Governance</a></li>
-                                <li><a href="#chapter-9">Chapter 9: Change Management &amp; Adoption</a></li>
-                        </ol>
+                    <ol>
+                        <li><a href="#chapter-7">Chapter 7: Leading AI Teams</a></li>
+                        <li><a href="#chapter-8">Chapter 8: Ethics, Risk &amp; Governance</a></li>
+                        <li><a href="#chapter-9">Chapter 9: Change Management &amp; Adoption</a></li>
+                    </ol>
                 </li>
                 <li><a href="#conclusion">Conclusion</a></li>
                 <li><a href="#appendix">Appendix &amp; Resources</a></li>
                 <li><a href="#references">References</a></li>
-        </ol>
-</nav>
+            </ol>
+        </nav>
 
     </main>
 
@@ -75,10 +75,11 @@
 
     <script>
         // small helper to toggle nav on mobile
-        document.querySelector('.hamburger')?.addEventListener('click', function(){
+        document.querySelector('.hamburger')?.addEventListener('click', function () {
             this.classList.toggle('active');
             document.querySelector('.nav-links')?.classList.toggle('active');
         });
     </script>
 </body>
+
 </html>
