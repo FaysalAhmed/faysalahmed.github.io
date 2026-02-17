@@ -1,0 +1,12 @@
+{
+  "name": "faysalahmed.github.io",
+  "version": "1.0.0",
+  "private": true,
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  },
+  "scripts": {
+    "start": "http-server ./ -p 8080 -c-1 -a 127.0.0.1",
+    "dev": "http-server ./ -p 8080 -c-1 -a 127.0.0.1"
+  }
+}
