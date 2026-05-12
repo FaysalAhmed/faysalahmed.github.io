@@ -1,0 +1,127 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog'))
+  .filter(p => !p.data.draft)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const allTags = [...new Set(posts.flatMap(p => p.data.tags))].sort();
+---
+
+<BlogLayout title="Blog" description="All blog posts by Faysal Ahmed.">
+  <section class="header">
+    <h1>Blog</h1>
+    <p>Thoughts on software, systems, and solving real problems.</p>
+  </section>
+
+  <section class="tags">
+    <span class="tag-label">Filter by tag:</span>
+    <span class="tag active" data-tag="">All</span>
+    {allTags.map(tag => <span class="tag" data-tag={tag}>{tag}</span>)}
+  </section>
+
+  <ul class="post-list">
+    {posts.map(post => (
+      <li>
+        <article>
+          <time datetime={post.data.date.toISOString()}>{post.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}</time>
+          <h2><a href={`/blog/${post.id}`}>{post.data.title}</a></h2>
+          <p>{post.data.description}</p>
+          {post.data.tags.length > 0 && (
+            <div class="tag-list">
+              {post.data.tags.map(tag => <span class="tag">{tag}</span>)}
+            </div>
+          )}
+        </article>
+      </li>
+    ))}
+  </ul>
+</BlogLayout>
+
+<script>
+  const tags = document.querySelectorAll('.tags .tag');
+  const posts = document.querySelectorAll('.post-list li');
+
+  tags.forEach(tag => {
+    tag.addEventListener('click', () => {
+      tags.forEach(t => t.classList.remove('active'));
+      tag.classList.add('active');
+      const selected = tag.dataset.tag;
+      posts.forEach(post => {
+        const postTags = [...post.querySelectorAll('.tag-list .tag')].map(t => t.textContent);
+        if (!selected || postTags.includes(selected)) {
+          post.style.display = '';
+        } else {
+          post.style.display = 'none';
+        }
+      });
+    });
+  });
+</script>
+
+<style>
+  .header { margin-bottom: 2rem; }
+  .header h1 { font-size: 2rem; margin-bottom: 0.5rem; }
+  .header p { color: var(--muted); }
+  .tags {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+  }
+  .tag-label {
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+  .tag {
+    font-size: 0.8rem;
+    color: var(--muted);
+    background: rgba(2, 6, 23, 0.04);
+    padding: 0.3rem 0.7rem;
+    border-radius: 999px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: background 0.15s, color 0.15s;
+  }
+  .tag:hover { background: rgba(2, 6, 23, 0.08); }
+  .tag.active {
+    background: linear-gradient(90deg, var(--primary), var(--accent));
+    color: #fff;
+    border-color: transparent;
+  }
+  .post-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+  .post-list article time {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin-bottom: 0.25rem;
+  }
+  .post-list article h2 {
+    font-size: 1.25rem;
+  }
+  .post-list article h2 a { color: var(--text); }
+  .post-list article h2 a:hover { color: var(--accent); }
+  .post-list article p {
+    color: var(--muted);
+    font-size: 0.9rem;
+    margin-top: 0.35rem;
+  }
+  .tag-list {
+    display: flex;
+    gap: 0.4rem;
+    margin-top: 0.5rem;
+    flex-wrap: wrap;
+  }
+  .tag-list .tag {
+    font-size: 0.75rem;
+    cursor: default;
+    background: rgba(2, 6, 23, 0.04);
+  }
+</style>

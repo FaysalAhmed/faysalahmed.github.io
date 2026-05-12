@@ -1,0 +1,98 @@
+---
+import BlogLayout from '../layouts/BlogLayout.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog'))
+  .filter(p => !p.data.draft)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 5);
+---
+
+<BlogLayout title="Blog" description="Articles about development, design and projects by Faysal Ahmed.">
+  <section class="hero">
+    <h1>Welcome</h1>
+    <p>I'm Faysal Ahmed — IT Lead at Ghorerbazar. I write about software engineering, cybersecurity, data science, and building internal tools that make teams more effective.</p>
+  </section>
+
+  <section class="recent-posts">
+    <h2>Recent Posts</h2>
+    <ul class="post-list">
+      {posts.map(post => (
+        <li>
+          <article>
+            <time datetime={post.data.date.toISOString()}>{post.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}</time>
+            <h3><a href={`/blog/${post.id}`}>{post.data.title}</a></h3>
+            <p>{post.data.description}</p>
+            <div class="tags">
+              {post.data.tags.map(tag => <span class="tag">{tag}</span>)}
+            </div>
+          </article>
+        </li>
+      ))}
+    </ul>
+    <a href="/blog" class="all-posts">View all posts &rarr;</a>
+  </section>
+</BlogLayout>
+
+<style>
+  .hero {
+    margin-bottom: 3rem;
+  }
+  .hero h1 {
+    font-size: 2rem;
+    margin-bottom: 0.75rem;
+  }
+  .hero p {
+    color: var(--muted);
+    max-width: 600px;
+  }
+  .recent-posts h2 {
+    font-size: 1.25rem;
+    margin-bottom: 1.5rem;
+  }
+  .post-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .post-list article time {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin-bottom: 0.25rem;
+  }
+  .post-list article h3 {
+    font-size: 1.15rem;
+  }
+  .post-list article h3 a {
+    color: var(--text);
+  }
+  .post-list article h3 a:hover {
+    color: var(--accent);
+  }
+  .post-list article p {
+    color: var(--muted);
+    font-size: 0.9rem;
+    margin-top: 0.25rem;
+  }
+  .tags {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+    flex-wrap: wrap;
+  }
+  .tag {
+    font-size: 0.75rem;
+    color: var(--muted);
+    background: rgba(2, 6, 23, 0.04);
+    padding: 0.25rem 0.6rem;
+    border-radius: 999px;
+  }
+  .all-posts {
+    display: inline-block;
+    margin-top: 1.5rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+</style>

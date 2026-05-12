@@ -1,0 +1,39 @@
+---
+const { title = "Faysal Ahmed" } = Astro.props;
+---
+
+<header>
+  <div class="inner">
+    <a href="/" class="brand">Faysal Ahmed</a>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/blog">Blog</a>
+    </nav>
+  </div>
+</header>
+
+<style>
+  header {
+    border-bottom: 1px solid var(--border);
+    background: var(--surface);
+  }
+  .inner {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 1rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .brand {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--text);
+  }
+  nav { display: flex; gap: 1.25rem; }
+  nav a {
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+  nav a:hover { color: var(--text); text-decoration: none; }
+</style>

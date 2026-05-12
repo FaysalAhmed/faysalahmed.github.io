@@ -1,12 +1,19 @@
 {
   "name": "faysalahmed.github.io",
+  "type": "module",
   "version": "1.0.0",
   "private": true,
-  "devDependencies": {
-    "http-server": "^14.1.1"
-  },
   "scripts": {
-    "start": "http-server ./ -p 8080 -c-1 -a 127.0.0.1",
-    "dev": "http-server ./ -p 8080 -c-1 -a 127.0.0.1"
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "astro": "^5.0.0"
+  },
+  "devDependencies": {
+    "@astrojs/mdx": "^4.0.0",
+    "@astrojs/rss": "^4.0.0",
+    "@astrojs/sitemap": "^3.0.0"
   }
 }
