@@ -1,0 +1,88 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+
+const books = [
+  {
+    title: 'Fundamentals of Solution Architecture',
+    description: 'A practical guide covering the full lifecycle of architectural thinking — from the role of the architect to designing, documenting, and evolving complex systems.',
+    slug: 'fosa',
+    chapters: 10,
+  },
+  {
+    title: 'Fundamentals of Product Management',
+    description: 'A practical guide covering the full product lifecycle — from understanding the PM role and defining strategy to running discovery, prioritising work, launching products, and growing your career.',
+    slug: 'fopm',
+    chapters: 10,
+  },
+];
+---
+
+<BlogLayout title="Books" description="Books and guides by Faysal Ahmed.">
+  <section class="hero">
+    <h1>Books</h1>
+    <p>In-depth guides covering software architecture, product management, and more.</p>
+  </section>
+
+  <section class="book-list">
+    {books.map(book => (
+      <article>
+        <h2><a href={`/${book.slug}/`}>{book.title}</a></h2>
+        <p>{book.description}</p>
+        <span class="meta">{book.chapters} chapters</span>
+      </article>
+    ))}
+  </section>
+</BlogLayout>
+
+<style>
+  .hero {
+    margin-bottom: 3rem;
+  }
+  .hero h1 {
+    font-size: 2rem;
+    margin-bottom: 0.75rem;
+  }
+  .hero p {
+    color: var(--muted);
+    max-width: 600px;
+  }
+  .book-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .book-list article {
+    padding: 1.5rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .book-list article:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(2, 6, 23, 0.06);
+  }
+  .book-list h2 {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+  }
+  .book-list h2 a {
+    color: var(--text);
+  }
+  .book-list h2 a:hover {
+    color: var(--accent);
+  }
+  .book-list p {
+    color: var(--muted);
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+    max-width: 600px;
+  }
+  .meta {
+    font-size: 0.8rem;
+    color: var(--primary);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+</style>
