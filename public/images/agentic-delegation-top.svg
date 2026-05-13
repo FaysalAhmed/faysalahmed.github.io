@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="g" x1="0" x2="1">
+      <stop offset="0" stop-color="#0fb9a2"/>
+      <stop offset="1" stop-color="#0a84ff"/>
+    </linearGradient>
+    <style>
+      .bg { fill: #0f1724; }
+      .shape { fill: url(#g); opacity: 0.95 }
+      .title { fill: #ffffff; font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; font-weight:700; font-size:44px }
+      .subtitle { fill: rgba(255,255,255,0.85); font-family: Inter, system-ui; font-size:20px }
+    </style>
+  </defs>
+  <rect width="1200" height="630" rx="16" fill="#071027" />
+  <g transform="translate(60,90)">
+    <ellipse class="shape" cx="420" cy="240" rx="520" ry="180" />
+    <rect class="shape" x="720" y="-40" width="420" height="320" rx="40" transform="rotate(16 930 120)" />
+    <g transform="translate(20,20)">
+      <text class="title" x="0" y="60">Agentic Delegation vs Recommendations</text>
+      <text class="subtitle" x="0" y="100">Is it just a smarter recommender system?</text>
+    </g>
+  </g>
+</svg>
