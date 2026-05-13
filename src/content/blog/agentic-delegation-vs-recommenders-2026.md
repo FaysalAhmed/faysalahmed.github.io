@@ -83,7 +83,3 @@ Agentic delegation is more than a sophisticated recommender: it changes who acts
 
 Designers and engineers should aim for hybrid patterns that progressively increase autonomy while preserving transparency, control, and accountability.
 
-If you'd like, I can:
-
-- Generate PNG/WebP header variants from the SVG for better social previews, and
-- Run a local preview with `npm run dev` so you can check rendering.
