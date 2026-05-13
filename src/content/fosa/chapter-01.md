@@ -9,14 +9,21 @@ chapter: 1
 
 <p class="lead">This chapter introduces the role of solution architecture, why it matters, and a practical mental model (CORE) you can use to structure decisions across projects.</p>
 
+<div class="callout callout-info">
+<strong>At a glance</strong>
+<p>Solution architecture turns business intent into a system design that can be built, operated, and evolved with confidence. The best architecture is rarely the fanciest one; it is the one that makes constraints, trade-offs, and future change visible.</p>
+</div>
+
 Solution architecture sits between enterprise architecture (the "big picture" of strategy, standards, and roadmaps) and detailed implementation. It answers the question: *given a specific business problem, what system design best solves it within the constraints of the organisation?*  
 
-A solution architect is responsible for:
+In practice, a solution architect is responsible for:
 
-    - Defining the high-level structure of a system
-    - Making technology choices aligned with business goals
-    - Balancing functional requirements with quality attributes (scalability, security, maintainability, cost)
-    - Communicating the design to developers, operations, and executives
+- Defining the high-level structure of a system
+- Making technology choices aligned with business goals
+- Balancing functional requirements with quality attributes (scalability, security, maintainability, cost)
+- Communicating the design to developers, operations, and executives
+ 
+These responsibilities are not separate tasks; they are different ways of making the same thing clear: what to build, why to build it that way, and how to keep it adaptable.
   
 
 ## The CORE Framework  
