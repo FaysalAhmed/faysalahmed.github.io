@@ -4,6 +4,14 @@ const year = new Date().getFullYear();
 
 <footer>
   <p>&copy; {year} Faysal Ahmed</p>
+  <nav aria-label="Social links">
+    <ul class="social-links">
+      <li><a href="https://www.facebook.com/FaysalAhmedShohel" target="_blank" rel="noopener noreferrer">Facebook</a></li>
+      <li><a href="https://x.com/ShohelIslam" target="_blank" rel="noopener noreferrer">X (Twitter)</a></li>
+      <li><a href="https://www.linkedin.com/in/faysalahmedshohel/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+      <li><a href="https://github.com/FaysalAhmed" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+    </ul>
+  </nav>
 </footer>
 
 <style>
@@ -14,5 +22,24 @@ const year = new Date().getFullYear();
     font-size: 0.85rem;
     border-top: 1px solid var(--border);
     margin-top: auto;
+  }
+
+  .social-links {
+    list-style: none;
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    padding: 0;
+    margin: 0.5rem 0 0 0;
+  }
+
+  .social-links a {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+
+  .social-links a:hover {
+    color: var(--accent);
   }
 </style>
