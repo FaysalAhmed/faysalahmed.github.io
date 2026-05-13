@@ -1,0 +1,56 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import { getCollection } from 'astro:content';
+
+const chapters = (await getCollection('hai'))
+  .filter(p => !p.data.draft)
+  .sort((a, b) => a.data.chapter - b.data.chapter);
+
+const toc = chapters.find(c => c.data.chapter === 0);
+const content = chapters.filter(c => c.data.chapter > 0);
+---
+
+<BlogLayout title="Human AI Interaction" description="Designing human-centered AI systems and interactions.">
+  <section class="hero">
+    <div class="hero-content">
+      <span class="badge">Online Book</span>
+      <h1>Human AI Interaction</h1>
+      <p>A practical guide to designing interfaces, agents, and governance for safe, useful AI systems.</p>
+      <div class="stats">
+        <div class="stat">
+          <span class="stat-value">{content.length}</span>
+          <span class="stat-label">Chapters</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {toc && (
+    <section class="toc">
+      <h2>Table of Contents</h2>
+      <div class="chapter-grid">
+        {content.map(chapter => (
+          <a href={`/hai/${chapter.slug}/`} class="chapter-card">
+            <span class="chapter-num">Chapter {chapter.data.chapter}</span>
+            <h3>{chapter.data.title}</h3>
+            <p>{chapter.data.description}</p>
+          </a>
+        ))}
+      </div>
+    </section>
+  )}
+</BlogLayout>
+
+<style>
+  .hero { margin-bottom: 3rem; }
+  .badge { display:inline-block; font-size:0.75rem; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; background:linear-gradient(90deg,var(--primary),var(--accent)); color:#fff; padding:0.3rem 0.7rem; border-radius:999px; margin-bottom:1rem; }
+  .hero h1 { font-size:2.25rem; line-height:1.2; margin-bottom:1rem; }
+  .hero p { color:var(--muted); max-width:580px; font-size:1.05rem; }
+  .chapter-grid { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+  .chapter-card { display:flex; flex-direction:column; gap:0.4rem; padding:1.25rem; background:var(--surface); border:1px solid var(--border); border-radius:12px; text-decoration:none; }
+  .chapter-card:hover { transform:translateY(-3px); box-shadow:0 12px 32px rgba(2,6,23,0.06); border-color:var(--primary); }
+  .chapter-num { font-size:0.75rem; text-transform:uppercase; color:var(--primary); font-weight:700; }
+  .chapter-card h3 { font-size:1rem; margin:0; }
+  .chapter-card p { color:var(--muted); font-size:0.85rem; margin:0; }
+  @media (max-width:640px) { .chapter-grid { grid-template-columns:1fr; } }
+</style>

@@ -1,0 +1,88 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const chapters = await getCollection('hai');
+  return chapters.filter(c => !c.data.draft).map(c => ({
+    params: { slug: c.slug },
+    props: { chapter: c },
+  }));
+}
+
+const { chapter } = Astro.props;
+const { Content } = await chapter.render();
+const canonical = `${Astro.site}/hai/${chapter.slug}/`;
+const ogImage = `${Astro.site}/og-${chapter.slug}.png`;
+
+const allChapters = (await getCollection('hai'))
+  .filter(c => !c.data.draft)
+  .sort((a, b) => a.data.chapter - b.data.chapter);
+
+const currentIdx = allChapters.findIndex(c => c.slug === chapter.slug);
+const prev = currentIdx > 0 ? allChapters[currentIdx - 1] : null;
+const next = currentIdx < allChapters.length - 1 ? allChapters[currentIdx + 1] : null;
+const isToc = chapter.data.chapter === 0;
+---
+<BlogLayout title={chapter.data.title} description={chapter.data.description} canonical={canonical} ogImage={ogImage} isArticle={chapter.data.chapter > 0} article={{ headline: chapter.data.title, description: chapter.data.description, url: canonical }}>
+  <div class="chapter-layout">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="/hai">Human AI Interaction</a>
+      {!isToc && <span class="separator">/</span>}
+      {!isToc && <span>{chapter.data.title}</span>}
+    </nav>
+
+    {!isToc ? (
+      <header class="chapter-hero">
+        <div class="chapter-hero__copy">
+          <span class="chapter-kicker">Chapter {chapter.data.chapter}</span>
+          <h1>{chapter.data.title}</h1>
+          <p class="chapter-deck">{chapter.data.description}</p>
+        </div>
+
+        <aside class="chapter-hero__meta" aria-label="Chapter summary">
+          <div class="meta-card">
+            <span class="meta-label">Book</span>
+            <strong>Human AI Interaction</strong>
+          </div>
+        </aside>
+      </header>
+    ) : null}
+
+    <article class="chapter">
+      <div class="content">
+        <Content />
+      </div>
+    </article>
+
+    <nav class="pagination" aria-label="Chapter navigation">
+      {prev ? (
+        <a href={`/hai/${prev.slug}/`} class="pagination-card prev">
+          <span class="dir">Previous</span>
+          <span class="title">{prev.data.title}</span>
+        </a>
+      ) : <span />}
+      {next && next.data.chapter > 0 && (
+        <a href={`/hai/${next.slug}/`} class="pagination-card next">
+          <span class="dir">Next</span>
+          <span class="title">{next.data.title}</span>
+        </a>
+      )}
+    </nav>
+  </div>
+</BlogLayout>
+
+<style>
+  /* reuse styles from fosa chapter layout */
+  .chapter-layout { display:grid; gap:1.5rem; }
+  .breadcrumb { display:flex; align-items:center; gap:0.5rem; font-size:0.85rem; color:var(--muted); }
+  .breadcrumb a { color:var(--muted); font-weight:500; }
+  .chapter-hero { display:grid; grid-template-columns: minmax(0, 1.8fr) minmax(260px, 0.9fr); gap:1rem; padding:1.5rem; border:1px solid var(--border); border-radius:18px; }
+  .chapter-kicker { width:fit-content; font-size:0.75rem; text-transform:uppercase; color:var(--primary); font-weight:700; padding:0.4rem 0.7rem; border-radius:999px; background:rgba(15,185,162,0.08); }
+  .chapter-hero h1 { font-size:clamp(2rem,4vw,3.1rem); margin:0; }
+  .chapter-deck { max-width:65ch; color:var(--muted); font-size:1.03rem; line-height:1.8; }
+  .meta-card { padding:1rem 1.1rem; border-radius:14px; border:1px solid var(--border); background:rgba(255,255,255,0.92); }
+  .chapter { display:grid; gap:1rem; }
+  .content { font-size:1.03rem; line-height:1.95; color:var(--text); }
+  .pagination { display:flex; justify-content:space-between; margin-top:1rem; }
+</style>
