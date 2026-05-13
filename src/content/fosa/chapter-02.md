@@ -2,6 +2,7 @@
 title: "The Solution Architect's Role"
 description: Responsibilities, mindsets, and career paths for solution architects.
 slug: chapter-02
+id: fosa-chapter-02
 chapter: 2
 ---
 

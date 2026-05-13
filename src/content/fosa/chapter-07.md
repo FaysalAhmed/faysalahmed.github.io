@@ -2,6 +2,7 @@
 title: Security and Data Architecture
 description: Threat modelling, zero trust, data modelling, storage strategies, and compliance.
 slug: chapter-07
+id: fosa-chapter-07
 chapter: 7
 ---
 

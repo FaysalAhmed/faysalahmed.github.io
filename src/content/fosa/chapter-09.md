@@ -2,6 +2,7 @@
 title: "DevOps and Architecture Documentation"
 description: CI/CD pipelines, environment strategy, observability, and keeping documentation alive.
 slug: chapter-09
+id: fosa-chapter-09
 chapter: 9
 ---
 

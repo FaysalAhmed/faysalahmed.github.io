@@ -2,6 +2,7 @@
 title: Architecture Patterns and Design
 description: Foundational patterns for structuring software systems.
 slug: chapter-05
+id: fosa-chapter-05
 chapter: 5
 ---
 

@@ -2,6 +2,7 @@
 title: "Integration, APIs, and Microservices"
 description: API design, event-driven integration, service decomposition, and microservice pitfalls.
 slug: chapter-08
+id: fosa-chapter-08
 chapter: 8
 ---
 

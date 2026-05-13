@@ -2,6 +2,7 @@
 title: Cloud and Infrastructure Architecture
 description: Cloud service models, hybrid strategies, cost governance, and infrastructure-as-code.
 slug: chapter-06
+id: fosa-chapter-06
 chapter: 6
 ---
 

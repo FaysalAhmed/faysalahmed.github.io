@@ -2,6 +2,7 @@
 title: Introduction to Solution Architecture
 description: Understanding the foundations of solution architecture and the CORE framework.
 slug: chapter-01
+id: fosa-chapter-01
 chapter: 1
 ---
 
@@ -29,7 +30,9 @@ These responsibilities are not separate tasks; they are different ways of making
 ## The CORE Framework  
 
 
-Throughout this book we refer to **CORE** — a simple mental model for solution architecture.
+Throughout this book we refer to **CORE** — a simple mental model for solution architecture.  
+  
+
 
 <figure>
 <table>
@@ -46,7 +49,8 @@ Throughout this book we refer to **CORE** — a simple mental model for solution
 <figcaption>Figure 1.1 — The CORE framework: every architectural decision should be traceable to at least one of these pillars.</figcaption>
 </figure>
 
-<div class="callout callout-tip">
+<div class="callout callout-tip">  
+
 <strong>Guideline</strong>
 <p>When evaluating a technology choice, map your reasoning to CORE. If a decision doesn't clearly connect to any pillar, it may be based on habit rather than analysis.</p>
 </div>

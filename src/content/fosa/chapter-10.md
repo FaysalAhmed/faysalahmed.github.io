@@ -2,6 +2,7 @@
 title: "Architecture Evaluation and Emerging Trends"
 description: Architecture reviews, trade-off analysis, and future trends in solution architecture.
 slug: chapter-10
+id: fosa-chapter-10
 chapter: 10
 ---
 

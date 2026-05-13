@@ -2,6 +2,7 @@
 title: Requirements and Stakeholder Management
 description: Gathering, analysing, and prioritising requirements while managing stakeholder expectations.
 slug: chapter-04
+id: fosa-chapter-04
 chapter: 4
 ---
 
