@@ -23,7 +23,11 @@ const { title, description } = Astro.props;
   <body>
     <Header />
     <main>
-      <slot />
+      <div class="page">
+        <div class="container">
+          <slot />
+        </div>
+      </div>
     </main>
     <Footer />
   </body>
@@ -36,5 +40,29 @@ const { title, description } = Astro.props;
     padding: 2rem 1.5rem;
     width: 100%;
     flex: 1;
+  }
+</style>
+
+<style is:global>
+  /* Page container for book/chapter styling */
+  main { max-width: 1100px; }
+  .page {
+    display: flex;
+    justify-content: center;
+    padding: 2rem 1rem;
+  }
+  .container {
+    width: 100%;
+    max-width: 980px;
+    background: var(--surface);
+    border-radius: 14px;
+    padding: 2.25rem;
+    box-shadow: 0 8px 30px rgba(2,6,23,0.06);
+    border: 1px solid rgba(2,6,23,0.04);
+  }
+
+  @media (max-width: 800px) {
+    .container { padding: 1.25rem; border-radius: 10px; }
+    main { padding: 0; }
   }
 </style>
