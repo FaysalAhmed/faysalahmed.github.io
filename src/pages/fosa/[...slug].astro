@@ -13,6 +13,7 @@ export async function getStaticPaths() {
 const { chapter } = Astro.props;
 const { Content } = await chapter.render();
 const canonical = `${Astro.site}/fosa/${chapter.slug}/`;
+const ogImage = `${Astro.site}/og-${chapter.slug}.png`;
 
 const allChapters = (await getCollection('fosa'))
   .filter(c => !c.data.draft)
@@ -23,8 +24,6 @@ const prev = currentIdx > 0 ? allChapters[currentIdx - 1] : null;
 const next = currentIdx < allChapters.length - 1 ? allChapters[currentIdx + 1] : null;
 const isToc = chapter.data.chapter === 0;
 ---
-
-const ogImage = `${Astro.site}/og-${chapter.slug}.png`;
 <BlogLayout title={chapter.data.title} description={chapter.data.description} canonical={canonical} ogImage={ogImage} isArticle={chapter.data.chapter > 0} article={{ headline: chapter.data.title, description: chapter.data.description, url: canonical }}>
   <div class="chapter-layout">
     <nav class="breadcrumb" aria-label="Breadcrumb">
