@@ -9,7 +9,9 @@ export interface Props {
 }
 
 const { title, description, canonical, isArticle, article, ogImage } = Astro.props;
-const siteUrl = Astro.site ?? 'https://faysalahmed.space';
+// Ensure Astro.site is a plain string — some environments provide a URL object
+const rawSite = Astro.site ?? 'https://faysalahmed.space';
+const siteUrl = typeof rawSite === 'string' ? rawSite : String(rawSite);
 const canonicalUrl = canonical ?? siteUrl;
 const imageUrl = ogImage ?? `${siteUrl.replace(/\/$/, '')}/og-image.svg`;
 ---
