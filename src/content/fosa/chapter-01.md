@@ -7,16 +7,20 @@ chapter: 1
 
 ## What Is Solution Architecture?
 
-Solution architecture sits between enterprise architecture (the "big picture" of strategy, standards, and roadmaps) and detailed implementation. It answers the question: *given a specific business problem, what system design best solves it within the constraints of the organisation?*
+<p class="lead">This chapter introduces the role of solution architecture, why it matters, and a practical mental model (CORE) you can use to structure decisions across projects.</p>
+
+Solution architecture sits between enterprise architecture (the "big picture" of strategy, standards, and roadmaps) and detailed implementation. It answers the question: *given a specific business problem, what system design best solves it within the constraints of the organisation?*  
 
 A solution architect is responsible for:
 
-- Defining the high-level structure of a system
-- Making technology choices aligned with business goals
-- Balancing functional requirements with quality attributes (scalability, security, maintainability, cost)
-- Communicating the design to developers, operations, and executives
+    - Defining the high-level structure of a system
+    - Making technology choices aligned with business goals
+    - Balancing functional requirements with quality attributes (scalability, security, maintainability, cost)
+    - Communicating the design to developers, operations, and executives
+  
 
-## The CORE Framework
+## The CORE Framework  
+
 
 Throughout this book we refer to **CORE** — a simple mental model for solution architecture.
 
@@ -78,6 +82,13 @@ We cover the full arc of solution architecture:
 <strong>How to use this book</strong>
 <p>Each chapter ends with practical takeaways you can apply immediately. Read sequentially for a full overview, or jump to individual chapters as needed. Cross-references point to related content throughout.</p>
 </div>
+
+## Key takeaways
+
+- Map decisions to the CORE pillars: Constraints, Outcomes, Risks, Evolvability.
+- Prefer explicit trade-offs over implicit assumptions.
+- Keep documentation (ADRs, diagrams) current to reduce system opacity.
+- Design for evolvability: small, reversible changes beat large, risky rewrites.
 
 ---
 
