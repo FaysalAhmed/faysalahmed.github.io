@@ -12,6 +12,7 @@ export async function getStaticPaths() {
 
 const { chapter } = Astro.props;
 const { Content } = await chapter.render();
+const canonical = `${Astro.site}/fosa/${chapter.slug}/`;
 
 const allChapters = (await getCollection('fosa'))
   .filter(c => !c.data.draft)
@@ -23,7 +24,7 @@ const next = currentIdx < allChapters.length - 1 ? allChapters[currentIdx + 1] :
 const isToc = chapter.data.chapter === 0;
 ---
 
-<BlogLayout title={chapter.data.title} description={chapter.data.description}>
+<BlogLayout title={chapter.data.title} description={chapter.data.description} canonical={canonical} isArticle={chapter.data.chapter > 0} article={{ headline: chapter.data.title, description: chapter.data.description, url: canonical }}>
   <div class="chapter-layout">
     <nav class="breadcrumb" aria-label="Breadcrumb">
       <a href="/fosa">Fundamentals of Solution Architecture</a>

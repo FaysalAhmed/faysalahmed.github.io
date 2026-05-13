@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://faysalahmed.space/sitemap-index.xml
+Host: https://faysalahmed.space
