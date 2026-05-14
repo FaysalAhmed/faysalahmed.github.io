@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="Bangladesh Fintech 2026">
+  <defs>
+    <linearGradient id="bgGrad" x1="0" x2="1">
+      <stop offset="0" stop-color="#041226" />
+      <stop offset="0.35" stop-color="#06243a" />
+      <stop offset="1" stop-color="#062a3f" />
+    </linearGradient>
+    <radialGradient id="bgRad" cx="0.8" cy="0.2" r="0.9">
+      <stop offset="0" stop-color="#083047" stop-opacity="0.18" />
+      <stop offset="1" stop-color="#041226" stop-opacity="0" />
+    </radialGradient>
+    <linearGradient id="gradA" x1="0" x2="1">
+      <stop offset="0" stop-color="#0fb9a2"/>
+      <stop offset="1" stop-color="#0a84ff"/>
+    </linearGradient>
+    <linearGradient id="gradB" x1="0" x2="1">
+      <stop offset="0" stop-color="#0a84ff" stop-opacity="0.95"/>
+      <stop offset="1" stop-color="#6c5ce7" stop-opacity="0.95"/>
+    </linearGradient>
+    <pattern id="dotPattern" width="12" height="12" patternUnits="userSpaceOnUse">
+      <rect width="12" height="12" fill="transparent" />
+      <circle cx="2" cy="10" r="1.2" fill="rgba(255,255,255,0.03)" />
+      <circle cx="8" cy="4" r="1" fill="rgba(255,255,255,0.02)" />
+    </pattern>
+    <style>
+      .card { fill: #071a2b; stroke: rgba(255,255,255,0.03); }
+      .title { fill: #fff; font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial; font-weight:700; font-size:42px }
+      .subtitle { fill: rgba(255,255,255,0.95); font-family: Inter, system-ui; font-size:18px }
+      .muted { fill: rgba(255,255,255,0.7); font-size:14px }
+      .accent { fill: url(#gradA) }
+      .accent2 { fill: url(#gradB) }
+      .chart { fill: rgba(255,255,255,0.06) }
+    </style>
+  </defs>
+
+  <!-- background approximation of the provided fintech wallpaper -->
+  <rect width="1200" height="630" rx="14" fill="url(#bgGrad)" />
+  <rect width="1200" height="630" rx="14" fill="url(#bgRad)" />
+  <rect width="1200" height="630" rx="14" fill="url(#dotPattern)" opacity="0.12" />
+
+  <!-- Card -->
+  <g transform="translate(72,72)">
+    <rect width="1056" height="486" rx="20" class="card" />
+
+    <!-- grid / faint chart background -->
+    <g transform="translate(48,36)">
+      <rect width="960" height="420" rx="12" fill="transparent" />
+      <g stroke="rgba(255,255,255,0.03)" stroke-width="1">
+        <!-- horizontal grid lines -->
+        <path d="M0 60 H960" />
+        <path d="M0 120 H960" />
+        <path d="M0 180 H960" />
+        <path d="M0 240 H960" />
+        <path d="M0 300 H960" />
+        <path d="M0 360 H960" />
+      </g>
+
+      <!-- rising line chart -->
+      <path d="M40 340 L140 300 L240 260 L360 220 L480 200 L600 170 L740 140 L860 120 L940 100" fill="none" stroke="url(#gradB)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" opacity="0.95" />
+
+      <!-- bar chart on left -->
+      <g transform="translate(24,220)">
+        <rect x="0" y="40" width="40" height="120" rx="6" class="accent" />
+        <rect x="64" y="20" width="40" height="140" rx="6" class="accent" opacity="0.9" />
+        <rect x="128" y="0" width="40" height="160" rx="6" class="accent" opacity="0.8" />
+      </g>
+
+      <!-- network nodes -->
+      <g transform="translate(520,40)" fill="white" opacity="0.95">
+        <circle cx="0" cy="0" r="6" fill="#fff" opacity="0.95" />
+        <circle cx="80" cy="40" r="6" fill="#fff" />
+        <circle cx="40" cy="100" r="6" fill="#fff" />
+        <path d="M0 0 L80 40 L40 100" stroke="rgba(255,255,255,0.12)" stroke-width="2" fill="none" />
+      </g>
+
+      <!-- smartphone + wallet icon on right -->
+      <g transform="translate(800,220)">
+        <rect x="0" y="0" width="120" height="200" rx="18" fill="#071a2b" stroke="rgba(255,255,255,0.04)" />
+        <rect x="18" y="28" width="84" height="120" rx="10" fill="#061426" />
+        <rect x="18" y="156" width="84" height="10" rx="5" fill="#0fb9a2" />
+        <g transform="translate(12,36)" fill="#fff" opacity="0.95">
+          <rect x="6" y="6" width="60" height="12" rx="6" fill="#0fb9a2" />
+        </g>
+      </g>
+
+      <!-- big taka watermark -->
+      <text x="640" y="360" font-size="180" fill="rgba(255,255,255,0.04)" font-family="Inter, system-ui">৳</text>
+
+      <!-- title -->
+      <g transform="translate(24,8)">
+        <text class="title" x="0" y="48">Bangladesh Fintech 2026</text>
+        <text class="subtitle" x="0" y="82">Growth, regulation, inclusion, and the post-payments era</text>
+        <text class="muted" x="0" y="106">Analysis · Opportunities · Risks</text>
+      </g>
+    </g>
+  </g>
+
+</svg>
