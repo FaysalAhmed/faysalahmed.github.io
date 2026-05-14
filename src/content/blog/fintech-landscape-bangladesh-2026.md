@@ -54,8 +54,3 @@ Regulatory priorities in 2026 include data protection, consumer credit rules for
 ## Final thoughts
 
 Bangladesh's fintech sector in 2026 balances strong consumer adoption with an evolving regulatory landscape. The winners will be platforms and products that deliver trust, transparency, and genuine inclusion while managing compliance and operational risks.
-
-If you'd like, I can:
-
-- Generate PNG/WebP social preview images from the SVG, and
-- Add richer SEO fields (canonical, structured data JSON-LD) to blog pages automatically by updating the blog page component (I can do that next).
