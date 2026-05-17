@@ -23,6 +23,7 @@ const imageUrl = ogImage ?? `${siteUrl.replace(/\/$/, '')}/og-image.svg`;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title ? `${title} · Faysal Ahmed` : 'Faysal Ahmed'}</title>
     {description && <meta name="description" content={description} />}
+    <meta name="keywords" content="Top Software Engineers in Bangladesh" />
     {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
 
     <!-- Open Graph / Facebook -->
@@ -41,6 +42,15 @@ const imageUrl = ogImage ?? `${siteUrl.replace(/\/$/, '')}/og-image.svg`;
     {description && <meta name="twitter:description" content={description} />}
     <meta name="twitter:image" content={imageUrl} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BM2F8QWHK8"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-BM2F8QWHK8');
+    </script>
   </head>
   <body>
     <Header />

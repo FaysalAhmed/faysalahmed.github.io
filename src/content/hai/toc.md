@@ -9,13 +9,13 @@ This book explores how people and AI systems can interact effectively, safely, a
 
 ## Contents
 
-1. Introduction to Human–AI Interaction
-2. Mental Models and Trust
-3. Interaction Patterns for Agents
-4. Feedback, Explanations, and Control
-5. Safety, Robustness, and Failure Modes
-6. Privacy and Data Considerations
-7. Organizational Workflows and Governance
-8. Evaluation and Metrics
-9. Case Studies
-10. Future Directions
+1. [Introduction to Human–AI Interaction](/hai/chapter-01/)
+2. [Mental Models and Trust](/hai/chapter-02/)
+3. [Interaction Patterns for Agents](/hai/chapter-03/)
+4. [Feedback, Explanations, and Control](/hai/chapter-04/)
+5. [Safety, Robustness, and Failure Modes](/hai/chapter-05/)
+6. [Privacy and Data Considerations](/hai/chapter-06/)
+7. [Organizational Workflows and Governance](/hai/chapter-07/)
+8. [Evaluation and Metrics](/hai/chapter-08/)
+9. [Case Studies](/hai/chapter-09/)
+10. [Future Directions](/hai/chapter-10/)
