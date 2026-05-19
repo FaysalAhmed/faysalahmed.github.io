@@ -13,6 +13,11 @@ export async function getStaticPaths() {
 const { chapter } = Astro.props;
 const { Content } = await chapter.render();
 
+const siteUrl = 'https://faysalahmed.space';
+const canonical = `${siteUrl}/fmopm/${chapter.slug}/`;
+const ogImage = `${siteUrl}/og-image.svg`;
+const isArticle = chapter.data.chapter > 0;
+
 const allChapters = (await getCollection('fmopm'))
   .filter(c => !c.data.draft)
   .sort((a, b) => a.data.chapter - b.data.chapter);
@@ -23,7 +28,7 @@ const next = currentIdx < allChapters.length - 1 ? allChapters[currentIdx + 1] :
 const isToc = chapter.data.chapter === 0;
 ---
 
-<BlogLayout title={chapter.data.title} description={chapter.data.description}>
+<BlogLayout title={chapter.data.title} description={chapter.data.description} canonical={canonical} ogImage={ogImage} isArticle={isArticle} article={{ headline: chapter.data.title, description: chapter.data.description, url: canonical }}>
   <nav class="breadcrumb">
     <a href="/fmopm">Fundamentals of Mobile Product Management</a>
     {!isToc && <span> / {chapter.data.title}</span>}

@@ -8,9 +8,13 @@ const chapters = (await getCollection('fmopm'))
 
 const toc = chapters.find(c => c.data.chapter === 0);
 const content = chapters.filter(c => c.data.chapter > 0);
+
+const siteUrl = 'https://faysalahmed.space';
+const canonical = `${siteUrl}/fmopm/`;
+const ogImage = `${siteUrl}/og-image.svg`;
 ---
 
-<BlogLayout title="Fundamentals of Mobile Product Management" description="Complete guide to mobile product management — platform strategy, app store dynamics, monetisation, and growth.">
+<BlogLayout title="Fundamentals of Mobile Product Management" description="Complete guide to mobile product management — platform strategy, app store dynamics, monetisation, and growth." canonical={canonical} ogImage={ogImage}>
   <section class="hero">
     <h1>Fundamentals of Mobile Product Management</h1>
     <p>A practical guide covering the mobile product lifecycle — from choosing native vs cross-platform and navigating app store submission to driving growth, retention, and monetisation on iOS and Android.</p>
