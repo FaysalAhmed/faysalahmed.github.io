@@ -1,0 +1,92 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import { getCollection } from 'astro:content';
+
+const chapters = (await getCollection('fmopm'))
+  .filter(p => !p.data.draft)
+  .sort((a, b) => a.data.chapter - b.data.chapter);
+
+const toc = chapters.find(c => c.data.chapter === 0);
+const content = chapters.filter(c => c.data.chapter > 0);
+---
+
+<BlogLayout title="Fundamentals of Mobile Product Management" description="Complete guide to mobile product management — platform strategy, app store dynamics, monetisation, and growth.">
+  <section class="hero">
+    <h1>Fundamentals of Mobile Product Management</h1>
+    <p>A practical guide covering the mobile product lifecycle — from choosing native vs cross-platform and navigating app store submission to driving growth, retention, and monetisation on iOS and Android.</p>
+  </section>
+
+  {toc && (
+    <section class="toc">
+      <h2>Table of Contents</h2>
+      <ol class="chapter-list">
+        {content.map(chapter => (
+          <li>
+            <article>
+              <span class="chapter-num">Chapter {chapter.data.chapter}</span>
+              <h3><a href={`/fmopm/${chapter.slug}/`}>{chapter.data.title}</a></h3>
+              <p>{chapter.data.description}</p>
+            </article>
+          </li>
+        ))}
+      </ol>
+    </section>
+  )}
+</BlogLayout>
+
+<style>
+  .hero {
+    margin-bottom: 3rem;
+  }
+  .hero h1 {
+    font-size: 2rem;
+    margin-bottom: 0.75rem;
+  }
+  .hero p {
+    color: var(--muted);
+    max-width: 600px;
+  }
+  .toc h2 {
+    font-size: 1.25rem;
+    margin-bottom: 1.5rem;
+  }
+  .chapter-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .chapter-list article {
+    padding: 1rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .chapter-list article:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(2, 6, 23, 0.06);
+  }
+  .chapter-num {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--primary);
+    font-weight: 600;
+  }
+  .chapter-list h3 {
+    font-size: 1.1rem;
+    margin: 0.25rem 0;
+  }
+  .chapter-list h3 a {
+    color: var(--text);
+  }
+  .chapter-list h3 a:hover {
+    color: var(--accent);
+  }
+  .chapter-list p {
+    color: var(--muted);
+    font-size: 0.9rem;
+    margin: 0;
+  }
+</style>

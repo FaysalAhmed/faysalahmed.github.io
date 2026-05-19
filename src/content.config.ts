@@ -44,4 +44,15 @@ const hai = defineCollection({
   }),
 });
 
-export const collections = { blog, fosa, fopm, hai };
+const fmopm = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    chapter: z.number(),
+    slug: z.string().optional(),
+    draft: z.boolean().default(false),
+  }),
+});
+
+export const collections = { blog, fosa, fopm, hai, fmopm };
