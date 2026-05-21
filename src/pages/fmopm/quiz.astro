@@ -50,6 +50,8 @@ const ogImage = `${siteUrl}/og-image.svg`;
 </BlogLayout>
 
 <script>
+import { track } from '../../scripts/analytics.js';
+
 const questions = [
   {
     question: "Which of the following is a key difference between mobile and web product management?",
@@ -222,6 +224,9 @@ function renderQuestion(idx) {
 
 function selectOption(idx, val) {
   answers[idx] = val;
+  const q = questions[idx];
+  const isCorrect = val === q.correct;
+  track('quiz_answer', { question: idx + 1, chapter: q.chapter, correct: isCorrect });
   document.querySelectorAll('.q-option').forEach((el, i) => {
     el.classList.toggle('selected', i === val);
   });
@@ -229,10 +234,12 @@ function selectOption(idx, val) {
 
 function showResult() {
   let score = 0;
+  let correctCount = 0;
   answers.forEach((ans, i) => {
-    if (ans === questions[i].correct) score += marksPerQuestion;
+    if (ans === questions[i].correct) { score += marksPerQuestion; correctCount++; }
   });
   const pct = (score / totalMarks) * 100;
+  track('quiz_complete', { score, total: totalMarks, percentage: pct, correct: correctCount, total_questions: questions.length });
   questionDiv.style.display = 'none';
   resultDiv.style.display = 'block';
   if (pct >= 80) {
@@ -290,6 +297,7 @@ function showResult() {
 }
 
 startBtn.addEventListener('click', () => {
+  track('quiz_start', { total_questions: questions.length });
   startDiv.style.display = 'none';
   questionDiv.style.display = 'block';
   renderQuestion(current);

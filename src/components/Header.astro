@@ -6,12 +6,19 @@ const { title = "Faysal Ahmed" } = Astro.props;
   <div class="inner">
     <a href="/" class="brand">Faysal Ahmed</a>
     <nav>
-      <a href="/">Home</a>
-      <a href="/blog">Blog</a>
-      <a href="/books">Books</a>
+      <a href="/" data-analytics-nav="Home">Home</a>
+      <a href="/blog" data-analytics-nav="Blog">Blog</a>
+      <a href="/books" data-analytics-nav="Books">Books</a>
     </nav>
   </div>
 </header>
+
+<script>
+  import { track } from '../scripts/analytics.js';
+  document.querySelectorAll('[data-analytics-nav]').forEach(el => {
+    el.addEventListener('click', () => track('navigation_click', { nav_item: el.dataset.analyticsNav }));
+  });
+</script>
 
 <style>
   header {

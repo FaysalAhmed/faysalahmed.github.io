@@ -24,7 +24,7 @@ const content = chapters.filter(c => c.data.chapter > 0);
           <li>
             <article>
               <span class="chapter-num">Chapter {chapter.data.chapter}</span>
-              <h3><a href={`/fopm/${chapter.slug}/`}>{chapter.data.title}</a></h3>
+              <h3><a href={`/fopm/${chapter.slug}/`} data-analytics-chapter={chapter.data.chapter}>{chapter.data.title}</a></h3>
               <p>{chapter.data.description}</p>
             </article>
           </li>
@@ -33,6 +33,15 @@ const content = chapters.filter(c => c.data.chapter > 0);
     </section>
   )}
 </BlogLayout>
+
+<script>
+  import { track } from '../../scripts/analytics.js';
+  document.querySelectorAll('[data-analytics-chapter]').forEach(el => {
+    el.addEventListener('click', function () {
+      track('chapter_click', { book: 'fopm', chapter: this.dataset.analyticsChapter, chapter_title: this.textContent.trim() });
+    });
+  });
+</script>
 
 <style>
   .hero {

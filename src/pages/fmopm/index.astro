@@ -28,7 +28,7 @@ const ogImage = `${siteUrl}/og-image.svg`;
           <li>
             <article>
               <span class="chapter-num">Chapter {chapter.data.chapter}</span>
-              <h3><a href={`/fmopm/${chapter.slug}/`}>{chapter.data.title}</a></h3>
+              <h3><a href={`/fmopm/${chapter.slug}/`} data-analytics-chapter={chapter.data.chapter}>{chapter.data.title}</a></h3>
               <p>{chapter.data.description}</p>
             </article>
           </li>
@@ -36,7 +36,7 @@ const ogImage = `${siteUrl}/og-image.svg`;
         <li>
           <article>
             <span class="chapter-num">Quiz</span>
-            <h3><a href="/fmopm/quiz/">Test Your Knowledge</a></h3>
+            <h3><a href="/fmopm/quiz/" data-analytics-chapter="quiz">Test Your Knowledge</a></h3>
             <p>10 questions covering the full book. Each question carries 2 marks (20 total).</p>
           </article>
         </li>
@@ -44,6 +44,15 @@ const ogImage = `${siteUrl}/og-image.svg`;
     </section>
   )}
 </BlogLayout>
+
+<script>
+  import { track } from '../../scripts/analytics.js';
+  document.querySelectorAll('[data-analytics-chapter]').forEach(el => {
+    el.addEventListener('click', function () {
+      track('chapter_click', { book: 'fmopm', chapter: this.dataset.analyticsChapter, chapter_title: this.textContent.trim() });
+    });
+  });
+</script>
 
 <style>
   .hero {

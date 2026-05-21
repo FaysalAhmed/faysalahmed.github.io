@@ -21,7 +21,7 @@ const posts = (await getCollection('blog'))
         <li>
           <article>
             <time datetime={post.data.date.toISOString()}>{post.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}</time>
-            <h3><a href={`/blog/${post.id}`}>{post.data.title}</a></h3>
+            <h3><a href={`/blog/${post.id}`} data-analytics-post={post.data.title}>{post.data.title}</a></h3>
             <p>{post.data.description}</p>
             <div class="tags">
               {post.data.tags.map(tag => <span class="tag">{tag}</span>)}
@@ -30,9 +30,19 @@ const posts = (await getCollection('blog'))
         </li>
       ))}
     </ul>
-    <a href="/blog" class="all-posts">View all posts &rarr;</a>
+    <a href="/blog" class="all-posts" data-analytics-cta="View all posts">View all posts &rarr;</a>
   </section>
 </BlogLayout>
+
+<script>
+  import { track } from '../scripts/analytics.js';
+  document.querySelectorAll('[data-analytics-post]').forEach(el => {
+    el.addEventListener('click', () => track('post_click', { post_title: el.dataset.analyticsPost, location: 'home' }));
+  });
+  document.querySelector('[data-analytics-cta]')?.addEventListener('click', function () {
+    track('cta_click', { cta_label: this.dataset.analyticsCta, location: 'home' });
+  });
+</script>
 
 <style>
   .hero {

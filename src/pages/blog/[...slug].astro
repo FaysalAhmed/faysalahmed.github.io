@@ -35,6 +35,11 @@ const ogImage = post.data.image ?? `${Astro.site}/og-blog-${post.id}.png`;
   </article>
 </BlogLayout>
 
+<script>
+  import { track } from '../../scripts/analytics.js';
+  track('blog_post_view', { post_title: document.title });
+</script>
+
 <style>
   .blog-post header {
     margin-bottom: 2rem;

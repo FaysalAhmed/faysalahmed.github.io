@@ -61,13 +61,13 @@ const isToc = chapter.data.chapter === 0;
 
     <nav class="pagination" aria-label="Chapter navigation">
       {prev ? (
-        <a href={`/fosa/${prev.slug}/`} class="pagination-card prev">
+        <a href={`/fosa/${prev.slug}/`} class="pagination-card prev" data-analytics-nav-direction="prev">
           <span class="dir">Previous</span>
           <span class="title">{prev.data.title}</span>
         </a>
       ) : <span />}
       {next && next.data.chapter > 0 && (
-        <a href={`/fosa/${next.slug}/`} class="pagination-card next">
+        <a href={`/fosa/${next.slug}/`} class="pagination-card next" data-analytics-nav-direction="next">
           <span class="dir">Next</span>
           <span class="title">{next.data.title}</span>
         </a>
@@ -75,6 +75,15 @@ const isToc = chapter.data.chapter === 0;
     </nav>
   </div>
 </BlogLayout>
+
+<script>
+  import { track } from '../../scripts/analytics.js';
+  document.querySelectorAll('[data-analytics-nav-direction]').forEach(el => {
+    el.addEventListener('click', function () {
+      track('chapter_nav', { book: 'fosa', direction: this.dataset.analyticsNavDirection, chapter_title: this.querySelector('.title')?.textContent?.trim() });
+    });
+  });
+</script>
 
 <style>
   .chapter-layout {

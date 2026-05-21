@@ -30,7 +30,7 @@ const content = chapters.filter(c => c.data.chapter > 0);
       <h2>Table of Contents</h2>
       <div class="chapter-grid">
         {content.map(chapter => (
-          <a href={`/hai/${chapter.slug}/`} class="chapter-card">
+          <a href={`/hai/${chapter.slug}/`} class="chapter-card" data-analytics-chapter={chapter.data.chapter}>
             <span class="chapter-num">Chapter {chapter.data.chapter}</span>
             <h3>{chapter.data.title}</h3>
             <p>{chapter.data.description}</p>
@@ -40,6 +40,15 @@ const content = chapters.filter(c => c.data.chapter > 0);
     </section>
   )}
 </BlogLayout>
+
+<script>
+  import { track } from '../../scripts/analytics.js';
+  document.querySelectorAll('[data-analytics-chapter]').forEach(el => {
+    el.addEventListener('click', function () {
+      track('chapter_click', { book: 'hai', chapter: this.dataset.analyticsChapter, chapter_title: this.querySelector('h3')?.textContent?.trim() });
+    });
+  });
+</script>
 
 <style>
   .hero { margin-bottom: 3rem; }

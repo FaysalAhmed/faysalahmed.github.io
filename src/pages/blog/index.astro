@@ -17,8 +17,8 @@ const allTags = [...new Set(posts.flatMap(p => p.data.tags))].sort();
 
   <section class="tags">
     <span class="tag-label">Filter by tag:</span>
-    <span class="tag active" data-tag="">All</span>
-    {allTags.map(tag => <span class="tag" data-tag={tag}>{tag}</span>)}
+    <span class="tag active" data-tag="" data-analytics-filter="">All</span>
+    {allTags.map(tag => <span class="tag" data-tag={tag} data-analytics-filter={tag}>{tag}</span>)}
   </section>
 
   <ul class="post-list">
@@ -26,7 +26,7 @@ const allTags = [...new Set(posts.flatMap(p => p.data.tags))].sort();
       <li>
         <article>
           <time datetime={post.data.date.toISOString()}>{post.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}</time>
-          <h2><a href={`/blog/${post.id}`}>{post.data.title}</a></h2>
+          <h2><a href={`/blog/${post.id}`} data-analytics-post={post.data.title}>{post.data.title}</a></h2>
           <p>{post.data.description}</p>
           {post.data.tags.length > 0 && (
             <div class="tag-list">
@@ -40,14 +40,17 @@ const allTags = [...new Set(posts.flatMap(p => p.data.tags))].sort();
 </BlogLayout>
 
 <script>
+  import { track } from '../../scripts/analytics.js';
+
   const tags = document.querySelectorAll('.tags .tag');
   const posts = document.querySelectorAll('.post-list li');
 
   tags.forEach(tag => {
     tag.addEventListener('click', () => {
+      const selected = tag.dataset.tag;
+      track('tag_filter', selected ? { tag: selected } : { tag: 'all' });
       tags.forEach(t => t.classList.remove('active'));
       tag.classList.add('active');
-      const selected = tag.dataset.tag;
       posts.forEach(post => {
         const postTags = [...post.querySelectorAll('.tag-list .tag')].map(t => t.textContent);
         if (!selected || postTags.includes(selected)) {
@@ -57,6 +60,10 @@ const allTags = [...new Set(posts.flatMap(p => p.data.tags))].sort();
         }
       });
     });
+  });
+
+  document.querySelectorAll('[data-analytics-post]').forEach(el => {
+    el.addEventListener('click', () => track('post_click', { post_title: el.dataset.analyticsPost, location: 'blog_index' }));
   });
 </script>
 

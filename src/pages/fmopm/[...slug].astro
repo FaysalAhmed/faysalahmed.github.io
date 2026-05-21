@@ -48,19 +48,28 @@ const isToc = chapter.data.chapter === 0;
 
   <nav class="pagination">
     {prev ? (
-      <a href={`/fmopm/${prev.slug}/`} class="prev">
+      <a href={`/fmopm/${prev.slug}/`} class="prev" data-analytics-nav-direction="prev">
         <span class="dir">Previous</span>
         <span class="title">{prev.data.title}</span>
       </a>
     ) : <span />}
     {next && next.data.chapter > 0 && (
-      <a href={`/fmopm/${next.slug}/`} class="next">
+      <a href={`/fmopm/${next.slug}/`} class="next" data-analytics-nav-direction="next">
         <span class="dir">Next</span>
         <span class="title">{next.data.title}</span>
       </a>
     )}
   </nav>
 </BlogLayout>
+
+<script>
+  import { track } from '../../scripts/analytics.js';
+  document.querySelectorAll('[data-analytics-nav-direction]').forEach(el => {
+    el.addEventListener('click', function () {
+      track('chapter_nav', { book: 'fmopm', direction: this.dataset.analyticsNavDirection, chapter_title: this.querySelector('.title')?.textContent?.trim() });
+    });
+  });
+</script>
 
 <style>
   .breadcrumb {

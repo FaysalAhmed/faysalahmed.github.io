@@ -38,13 +38,20 @@ const books = [
   <section class="book-list">
     {books.map(book => (
       <article>
-        <h2><a href={`/${book.slug}/`}>{book.title}</a></h2>
+        <h2><a href={`/${book.slug}/`} data-analytics-book={book.slug}>{book.title}</a></h2>
         <p>{book.description}</p>
         <span class="meta">{book.chapters} chapters</span>
       </article>
     ))}
   </section>
 </BlogLayout>
+
+<script>
+  import { track } from '../../scripts/analytics.js';
+  document.querySelectorAll('[data-analytics-book]').forEach(el => {
+    el.addEventListener('click', () => track('book_click', { book: el.dataset.analyticsBook }));
+  });
+</script>
 
 <style>
   .hero {
