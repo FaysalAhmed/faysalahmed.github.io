@@ -40,3 +40,6 @@ Instrumenting events, A/B testing on mobile, feature flags, and integrating with
 
 ### [Chapter 10: Mobile Product Launch & Operations](/fmopm/chapter-10/)
 Launch playbook, phased rollouts, incident response on mobile, version fragmentation, and sunsetting old versions.
+
+### [Quiz: Test Your Knowledge](/fmopm/quiz/)
+10 questions covering the full book. Each question carries 2 marks (20 total).

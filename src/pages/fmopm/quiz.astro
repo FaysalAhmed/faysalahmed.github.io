@@ -1,0 +1,489 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+
+const siteUrl = 'https://faysalahmed.space';
+const canonical = `${siteUrl}/fmopm/quiz/`;
+const ogImage = `${siteUrl}/og-image.svg`;
+---
+
+<BlogLayout title="FMOPM Quiz" description="Test your knowledge of Fundamentals of Mobile Product Management with this 20-mark interactive quiz." canonical={canonical} ogImage={ogImage}>
+  <nav class="breadcrumb">
+    <a href="/fmopm">Fundamentals of Mobile Product Management</a>
+    <span> / Quiz</span>
+  </nav>
+
+  <article class="quiz-page">
+    <header>
+      <h1>FMOPM Quiz</h1>
+      <p class="lead">Test your understanding of mobile product management. 10 questions · 20 marks.</p>
+    </header>
+
+    <div id="quiz-root">
+      <div id="quiz-start" class="quiz-card centre">
+        <p>You have 10 questions covering the full book — from the mobile landscape and platform strategy to launch and operations. Each question carries <strong>2 marks</strong>.</p>
+        <button class="btn" id="start-btn">Start Quiz</button>
+      </div>
+
+      <div id="quiz-question" class="quiz-card" style="display:none">
+        <div class="q-header">
+          <span class="q-num" id="q-num"></span>
+          <span class="q-marks">2 marks</span>
+        </div>
+        <p class="q-text" id="q-text"></p>
+        <div class="q-options" id="q-options"></div>
+        <div class="q-actions">
+          <button class="btn" id="prev-btn" disabled>Previous</button>
+          <button class="btn btn-primary" id="next-btn">Next</button>
+        </div>
+      </div>
+
+      <div id="quiz-result" class="quiz-card centre" style="display:none">
+        <div class="result-icon" id="result-icon"></div>
+        <h2 id="result-heading"></h2>
+        <p class="result-score" id="result-score"></p>
+        <p class="result-msg" id="result-msg"></p>
+        <div id="result-review" class="review"></div>
+        <button class="btn" id="restart-btn">Try Again</button>
+      </div>
+    </div>
+  </article>
+</BlogLayout>
+
+<script>
+const questions = [
+  {
+    question: "Which of the following is a key difference between mobile and web product management?",
+    options: [
+      "Mobile apps don't need analytics",
+      "App store review gates every update, making iteration slower",
+      "Mobile users have longer session lengths than web users",
+      "Mobile products never need offline support"
+    ],
+    correct: 1,
+    chapter: 1,
+    chapterTitle: "The Mobile Landscape"
+  },
+  {
+    question: "When should a startup with a small team and fast iteration needs choose cross-platform over native?",
+    options: [
+      "When the app relies heavily on ARKit or Camera2 API",
+      "When the team has separate iOS and Android specialists",
+      "When limited team size and rapid iteration are the priority",
+      "When building a high-performance 3D game"
+    ],
+    correct: 2,
+    chapter: 2,
+    chapterTitle: "Platform Strategy — Native vs Cross-Platform"
+  },
+  {
+    question: "What is the primary benefit of using TestFlight during mobile app development?",
+    options: [
+      "It replaces the need for App Store review",
+      "It allows beta testing with external users before public release",
+      "It automatically generates app store listing screenshots",
+      "It compiles native code faster than Xcode"
+    ],
+    correct: 1,
+    chapter: 3,
+    chapterTitle: "App Store Strategy & Submission"
+  },
+  {
+    question: "Which research method is uniquely suited to mobile user research?",
+    options: [
+      "Focus groups in a lab",
+      "Gestures and touch heatmap analysis via session replays",
+      "Long-form written surveys emailed to users",
+      "Telephone interviews"
+    ],
+    correct: 1,
+    chapter: 4,
+    chapterTitle: "Mobile User Research & Discovery"
+  },
+  {
+    question: "The median mobile app session length is approximately:",
+    options: [
+      "Under 3 minutes",
+      "10–15 minutes",
+      "30 minutes",
+      "Over 1 hour"
+    ],
+    correct: 0,
+    chapter: 1,
+    chapterTitle: "The Mobile Landscape"
+  },
+  {
+    question: "In the AARRR mobile metrics framework, what does the second 'A' (Activation) typically measure?",
+    options: [
+      "The number of app store impressions",
+      "The number of uninstalls",
+      "The user's first meaningful action or 'aha' moment",
+      "The average revenue per paying user"
+    ],
+    correct: 2,
+    chapter: 6,
+    chapterTitle: "Mobile Product Metrics"
+  },
+  {
+    question: "Which growth technique allows a mobile app to link to specific content inside the app from an external source?",
+    options: [
+      "Push notifications",
+      "Deep linking",
+      "App Clips",
+      "In-app surveys"
+    ],
+    correct: 1,
+    chapter: 7,
+    chapterTitle: "Growth & Retention for Mobile Apps"
+  },
+  {
+    question: "Under Apple's App Store commission model, what percentage does Apple typically take from digital goods purchases?",
+    options: [
+      "10%",
+      "15% or 30% depending on revenue tier",
+      "25% flat",
+      "40%"
+    ],
+    correct: 1,
+    chapter: 8,
+    chapterTitle: "Monetisation Models"
+  },
+  {
+    question: "What is the primary purpose of feature flags in mobile experimentation?",
+    options: [
+      "To permanently remove old features",
+      "To toggle features on/off remotely without an app store update",
+      "To display flags of different countries in the UI",
+      "To speed up the app store approval process"
+    ],
+    correct: 1,
+    chapter: 9,
+    chapterTitle: "Mobile Analytics & Experimentation"
+  },
+  {
+    question: "What is a recommended strategy for handling mobile app version fragmentation?",
+    options: [
+      "Force all users to update before using the app",
+      "Build separate apps for each OS version",
+      "Use a phased rollout and maintain backward compatibility for critical features",
+      "Ignore older OS versions entirely"
+    ],
+    correct: 2,
+    chapter: 10,
+    chapterTitle: "Mobile Product Launch & Operations"
+  }
+];
+
+const marksPerQuestion = 2;
+const totalMarks = questions.length * marksPerQuestion;
+
+let current = 0;
+let answers = new Array(questions.length).fill(null);
+
+const startDiv = document.getElementById('quiz-start');
+const questionDiv = document.getElementById('quiz-question');
+const resultDiv = document.getElementById('quiz-result');
+const qNum = document.getElementById('q-num');
+const qText = document.getElementById('q-text');
+const qOptions = document.getElementById('q-options');
+const prevBtn = document.getElementById('prev-btn');
+const nextBtn = document.getElementById('next-btn');
+const startBtn = document.getElementById('start-btn');
+const restartBtn = document.getElementById('restart-btn');
+const resultIcon = document.getElementById('result-icon');
+const resultHeading = document.getElementById('result-heading');
+const resultScore = document.getElementById('result-score');
+const resultMsg = document.getElementById('result-msg');
+
+function renderQuestion(idx) {
+  const q = questions[idx];
+  qNum.textContent = `Question ${idx + 1} of ${questions.length}`;
+  qText.textContent = q.question;
+  qOptions.innerHTML = '';
+  q.options.forEach((opt, i) => {
+    const label = document.createElement('label');
+    label.className = 'q-option';
+    if (answers[idx] === i) label.classList.add('selected');
+    const radio = document.createElement('input');
+    radio.type = 'radio';
+    radio.name = 'q-option';
+    radio.value = i;
+    radio.checked = answers[idx] === i;
+    radio.addEventListener('change', () => selectOption(idx, i));
+    const span = document.createElement('span');
+    span.textContent = opt;
+    label.appendChild(radio);
+    label.appendChild(span);
+    qOptions.appendChild(label);
+  });
+  prevBtn.disabled = idx === 0;
+  const isLast = idx === questions.length - 1;
+  nextBtn.textContent = isLast ? 'Finish' : 'Next';
+}
+
+function selectOption(idx, val) {
+  answers[idx] = val;
+  document.querySelectorAll('.q-option').forEach((el, i) => {
+    el.classList.toggle('selected', i === val);
+  });
+}
+
+function showResult() {
+  let score = 0;
+  answers.forEach((ans, i) => {
+    if (ans === questions[i].correct) score += marksPerQuestion;
+  });
+  const pct = (score / totalMarks) * 100;
+  questionDiv.style.display = 'none';
+  resultDiv.style.display = 'block';
+  if (pct >= 80) {
+    resultIcon.textContent = '🎉';
+    resultHeading.textContent = 'Excellent!';
+    resultMsg.textContent = 'You have a strong command of mobile product management fundamentals.';
+  } else if (pct >= 50) {
+    resultIcon.textContent = '👍';
+    resultHeading.textContent = 'Good Effort!';
+    resultMsg.textContent = 'You know the basics—review the chapters you found tricky to strengthen your understanding.';
+  } else {
+    resultIcon.textContent = '📖';
+    resultHeading.textContent = 'Keep Learning!';
+    resultMsg.textContent = 'Consider re-reading the book to solidify your mobile product management knowledge.';
+  }
+  resultScore.textContent = `You scored ${score} out of ${totalMarks} (${pct}%)`;
+
+  const review = document.getElementById('result-review');
+  review.innerHTML = '';
+  const heading = document.createElement('h3');
+  heading.className = 'review-heading';
+  heading.textContent = 'Answer Review';
+  review.appendChild(heading);
+  questions.forEach((q, i) => {
+    const row = document.createElement('div');
+    row.className = 'review-item';
+    const isCorrect = answers[i] === q.correct;
+    row.classList.add(isCorrect ? 'correct' : 'wrong');
+    const status = document.createElement('span');
+    status.className = 'review-status';
+    status.textContent = isCorrect ? '✓' : '✗';
+    const body = document.createElement('div');
+    body.className = 'review-body';
+    const qLabel = document.createElement('strong');
+    qLabel.textContent = `Q${i + 1}. ${q.question}`;
+    body.appendChild(qLabel);
+    const detail = document.createElement('span');
+    detail.className = 'review-detail';
+    if (isCorrect) {
+      detail.textContent = `Your answer: ${q.options[answers[i]]}`;
+    } else {
+      const userAns = answers[i] !== null ? q.options[answers[i]] : '(not answered)';
+      detail.innerHTML = `Your answer: ${userAns} · Correct answer: <strong>${q.options[q.correct]}</strong>`;
+    }
+    body.appendChild(detail);
+    const ref = document.createElement('a');
+    ref.className = 'review-ref';
+    ref.href = `/fmopm/chapter-${String(q.chapter).padStart(2, '0')}/`;
+    ref.textContent = `Chapter ${q.chapter}: ${q.chapterTitle}`;
+    body.appendChild(ref);
+    row.appendChild(status);
+    row.appendChild(body);
+    review.appendChild(row);
+  });
+}
+
+startBtn.addEventListener('click', () => {
+  startDiv.style.display = 'none';
+  questionDiv.style.display = 'block';
+  renderQuestion(current);
+});
+
+prevBtn.addEventListener('click', () => {
+  if (current > 0) {
+    current--;
+    renderQuestion(current);
+  }
+});
+
+nextBtn.addEventListener('click', () => {
+  if (answers[current] === null) {
+    alert('Please select an answer before proceeding.');
+    return;
+  }
+  if (current === questions.length - 1) {
+    showResult();
+  } else {
+    current++;
+    renderQuestion(current);
+  }
+});
+
+restartBtn.addEventListener('click', () => {
+  current = 0;
+  answers = new Array(questions.length).fill(null);
+  resultDiv.style.display = 'none';
+  startDiv.style.display = 'block';
+});
+</script>
+
+<style>
+  .breadcrumb {
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin-bottom: 2rem;
+  }
+  .breadcrumb a { color: var(--muted); }
+  .breadcrumb a:hover { color: var(--accent); }
+
+  .quiz-page header { margin-bottom: 2rem; }
+  .quiz-page h1 { font-size: 2rem; }
+
+  .quiz-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 2rem;
+  }
+  .quiz-card.centre {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+  }
+
+  .q-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+  .q-num {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--primary);
+    font-weight: 600;
+  }
+  .q-marks {
+    font-size: 0.8rem;
+    color: var(--muted);
+    background: var(--bg);
+    padding: 0.2rem 0.6rem;
+    border-radius: 6px;
+    font-weight: 600;
+  }
+  .q-text {
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin-bottom: 1.25rem;
+    line-height: 1.5;
+  }
+  .q-options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    margin-bottom: 1.5rem;
+  }
+  .q-option {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s;
+    font-size: 0.95rem;
+  }
+  .q-option:hover {
+    background: rgba(15, 185, 162, 0.04);
+    border-color: var(--primary);
+  }
+  .q-option.selected {
+    background: rgba(15, 185, 162, 0.08);
+    border-color: var(--primary);
+  }
+  .q-option input { display: none; }
+
+  .q-actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.75rem;
+  }
+
+  .btn {
+    padding: 0.6rem 1.4rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--surface);
+    color: var(--text);
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s;
+  }
+  .btn:hover { background: var(--bg); border-color: var(--muted); }
+  .btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+  .btn-primary {
+    background: var(--primary);
+    color: #fff;
+    border-color: var(--primary);
+  }
+  .btn-primary:hover { background: #0ea890; border-color: #0ea890; }
+
+  .result-icon { font-size: 3rem; }
+  .result-score {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--primary);
+  }
+  .result-msg {
+    color: var(--muted);
+    max-width: 400px;
+  }
+
+  .review {
+    width: 100%;
+    text-align: left;
+    margin-top: 1rem;
+  }
+  .review-heading {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .review-item {
+    display: flex;
+    gap: 0.75rem;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--border);
+    align-items: flex-start;
+  }
+  .review-item:last-child { border-bottom: none; }
+  .review-status {
+    font-size: 1.1rem;
+    font-weight: 700;
+    line-height: 1.4;
+    flex-shrink: 0;
+    width: 1.5rem;
+    text-align: center;
+  }
+  .review-item.correct .review-status { color: #16a34a; }
+  .review-item.wrong .review-status { color: #dc2626; }
+  .review-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    font-size: 0.9rem;
+  }
+  .review-body strong { font-size: 0.95rem; }
+  .review-detail { color: var(--muted); }
+  .review-ref {
+    font-size: 0.8rem;
+    color: var(--primary);
+    font-weight: 600;
+  }
+  .review-ref:hover { color: var(--accent); }
+</style>
