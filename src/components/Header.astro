@@ -9,10 +9,6 @@ const { title = "Faysal Ahmed" } = Astro.props;
       <a href="/" data-analytics-nav="Home">Home</a>
       <a href="/blog" data-analytics-nav="Blog">Blog</a>
       <a href="/books" data-analytics-nav="Books">Books</a>
-      <a href="/search" class="search-link" data-analytics-nav="Search" aria-label="Search books">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-        <span class="search-label">Search</span>
-      </a>
     </nav>
   </div>
 </header>
@@ -48,19 +44,4 @@ const { title = "Faysal Ahmed" } = Astro.props;
     font-size: 0.9rem;
   }
   nav a:hover { color: var(--text); text-decoration: none; }
-  .search-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.35rem;
-  }
-  .search-link svg {
-    opacity: 0.6;
-    transition: opacity 0.15s;
-  }
-  .search-link:hover svg {
-    opacity: 1;
-  }
-  @media (max-width: 480px) {
-    .search-label { display: none; }
-  }
 </style>

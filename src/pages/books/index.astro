@@ -41,6 +41,10 @@ const books = [
     <p>In-depth guides covering software architecture, product management, and more.</p>
   </section>
 
+  <div class="search-section">
+    <div id="search"></div>
+  </div>
+
   <section class="book-list">
     {books.map(book => (
       <article>
@@ -51,6 +55,17 @@ const books = [
     ))}
   </section>
 </BlogLayout>
+
+<script type="module">
+  import { PagefindUI } from '@pagefind/default-ui';
+
+  new PagefindUI({
+    element: '#search',
+    showSubResults: true,
+    showImages: false,
+    resetStyles: false,
+  });
+</script>
 
 <script>
   import { track } from '../../scripts/analytics.js';
@@ -103,6 +118,72 @@ const books = [
     margin-bottom: 0.5rem;
     max-width: 600px;
   }
+  .search-section {
+    margin-bottom: 2.5rem;
+  }
+
+  /* Pagefind UI overrides */
+  :global(.pagefind-ui__search-input) {
+    border: 1px solid var(--border) !important;
+    border-radius: 10px !important;
+    padding: 0.85rem 1rem !important;
+    font-size: 1rem !important;
+    font-family: inherit !important;
+    background: var(--surface) !important;
+    color: var(--text) !important;
+  }
+  :global(.pagefind-ui__search-clear) {
+    padding: 0.5rem !important;
+  }
+  :global(.pagefind-ui__search-clear svg) {
+    width: 18px !important;
+    height: 18px !important;
+  }
+  :global(.pagefind-ui__drawer) {
+    margin-top: 1rem !important;
+  }
+  :global(.pagefind-ui__result) {
+    border: 1px solid var(--border) !important;
+    border-radius: 12px !important;
+    padding: 1.25rem !important;
+    margin-bottom: 0.75rem !important;
+    background: var(--surface) !important;
+    transition: box-shadow 0.15s ease !important;
+  }
+  :global(.pagefind-ui__result:hover) {
+    box-shadow: 0 8px 24px rgba(2, 6, 23, 0.06) !important;
+  }
+  :global(.pagefind-ui__result-title) {
+    font-size: 1.1rem !important;
+    font-weight: 600 !important;
+    color: var(--text) !important;
+  }
+  :global(.pagefind-ui__result-title a) {
+    color: var(--accent) !important;
+    text-decoration: none !important;
+  }
+  :global(.pagefind-ui__result-title a:hover) {
+    text-decoration: underline !important;
+  }
+  :global(.pagefind-ui__result-excerpt) {
+    color: var(--muted) !important;
+    font-size: 0.9rem !important;
+    line-height: 1.7 !important;
+    margin-top: 0.5rem !important;
+  }
+  :global(.pagefind-ui__result-excerpt mark) {
+    background: rgba(15, 185, 162, 0.15) !important;
+    color: var(--text) !important;
+    padding: 0.1em 0.2em !important;
+    border-radius: 4px !important;
+  }
+  :global(.pagefind-ui__message) {
+    color: var(--muted) !important;
+    font-size: 0.9rem !important;
+    text-align: center !important;
+    padding: 2rem !important;
+  }
+
   .meta {
     font-size: 0.8rem;
     color: var(--primary);
