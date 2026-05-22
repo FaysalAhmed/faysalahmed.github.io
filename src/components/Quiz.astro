@@ -1,0 +1,344 @@
+---
+export interface Props {
+  questions: Array<{ question: string; options: string[]; correct: number }>;
+  quizTitle: string;
+  quizDescription: string;
+}
+
+const { questions, quizTitle, quizDescription } = Astro.props;
+const totalQuestions = questions.length;
+const quizSlug = quizDescription.toLowerCase().replace(/\s+/g, '-');
+---
+
+<div id="quiz-root">
+  <div id="quiz-start" class="quiz-card centre">
+    <p><strong>{quizTitle}</strong></p>
+    <p>{quizDescription} &mdash; {totalQuestions} question{totalQuestions !== 1 ? 's' : ''}.</p>
+    <button class="btn btn-primary" id="start-btn">Start Quiz</button>
+  </div>
+
+  <div id="quiz-question" class="quiz-card" style="display:none">
+    <div class="q-header">
+      <span class="q-num" id="q-num"></span>
+      <span class="q-marks">1 mark</span>
+    </div>
+    <p class="q-text" id="q-text"></p>
+    <div class="q-options" id="q-options"></div>
+    <div class="q-actions">
+      <button class="btn" id="prev-btn" disabled>Previous</button>
+      <button class="btn btn-primary" id="next-btn">Next</button>
+    </div>
+  </div>
+
+  <div id="quiz-result" class="quiz-card centre" style="display:none">
+    <div class="result-icon" id="result-icon"></div>
+    <h2 id="result-heading"></h2>
+    <p class="result-score" id="result-score"></p>
+    <p class="result-msg" id="result-msg"></p>
+    <div id="result-review" class="review"></div>
+    <button class="btn" id="restart-btn">Try Again</button>
+  </div>
+</div>
+
+<div id="quiz-data-store" style="display:none">{JSON.stringify(questions)}</div>
+<div id="quiz-slug-store" style="display:none">{quizSlug}</div>
+
+<script>
+  import { track } from '../scripts/analytics.js';
+
+  const questions = JSON.parse(document.getElementById('quiz-data-store').textContent);
+  const quizSlug = document.getElementById('quiz-slug-store').textContent.trim();
+
+  const marksPerQuestion = 1;
+  const totalMarks = questions.length * marksPerQuestion;
+
+  let current = 0;
+  let answers = new Array(questions.length).fill(null);
+
+  const startDiv = document.getElementById('quiz-start');
+  const questionDiv = document.getElementById('quiz-question');
+  const resultDiv = document.getElementById('quiz-result');
+  const qNum = document.getElementById('q-num');
+  const qText = document.getElementById('q-text');
+  const qOptions = document.getElementById('q-options');
+  const prevBtn = document.getElementById('prev-btn');
+  const nextBtn = document.getElementById('next-btn');
+  const startBtn = document.getElementById('start-btn');
+  const restartBtn = document.getElementById('restart-btn');
+  const resultIcon = document.getElementById('result-icon');
+  const resultHeading = document.getElementById('result-heading');
+  const resultScore = document.getElementById('result-score');
+  const resultMsg = document.getElementById('result-msg');
+
+  function renderQuestion(idx) {
+    const q = questions[idx];
+    qNum.textContent = `Question ${idx + 1} of ${questions.length}`;
+    qText.textContent = q.question;
+    qOptions.innerHTML = '';
+    q.options.forEach((opt, i) => {
+      const label = document.createElement('label');
+      label.className = 'q-option';
+      if (answers[idx] === i) label.classList.add('selected');
+      const radio = document.createElement('input');
+      radio.type = 'radio';
+      radio.name = 'q-option';
+      radio.value = i;
+      radio.checked = answers[idx] === i;
+      radio.addEventListener('change', () => selectOption(idx, i));
+      const span = document.createElement('span');
+      span.textContent = opt;
+      label.appendChild(radio);
+      label.appendChild(span);
+      qOptions.appendChild(label);
+    });
+    prevBtn.disabled = idx === 0;
+    const isLast = idx === questions.length - 1;
+    nextBtn.textContent = isLast ? 'Finish' : 'Next';
+  }
+
+  function selectOption(idx, val) {
+    answers[idx] = val;
+    const q = questions[idx];
+    const isCorrect = val === q.correct;
+    track('quiz_answer', { quiz: quizSlug, question: idx + 1, correct: isCorrect });
+    document.querySelectorAll('.q-option').forEach((el, i) => {
+      el.classList.toggle('selected', i === val);
+    });
+  }
+
+  function showResult() {
+    let score = 0;
+    let correctCount = 0;
+    answers.forEach((ans, i) => {
+      if (ans === questions[i].correct) { score += marksPerQuestion; correctCount++; }
+    });
+    const pct = (score / totalMarks) * 100;
+    track('quiz_complete', { quiz: quizSlug, score, total: totalMarks, percentage: pct, correct: correctCount, total_questions: questions.length });
+    questionDiv.style.display = 'none';
+    resultDiv.style.display = 'block';
+    if (pct >= 80) {
+      resultIcon.textContent = '';
+      resultHeading.textContent = 'Excellent!';
+      resultMsg.textContent = 'You have a strong command of this material.';
+    } else if (pct >= 50) {
+      resultIcon.textContent = '';
+      resultHeading.textContent = 'Good Effort!';
+      resultMsg.textContent = 'Review the topics you found tricky to strengthen your understanding.';
+    } else {
+      resultIcon.textContent = '';
+      resultHeading.textContent = 'Keep Learning!';
+      resultMsg.textContent = 'Consider re-reading the chapter to solidify your knowledge.';
+    }
+    resultScore.textContent = `You scored ${score} out of ${totalMarks} (${pct}%)`;
+
+    const review = document.getElementById('result-review');
+    review.innerHTML = '';
+    const heading = document.createElement('h3');
+    heading.className = 'review-heading';
+    heading.textContent = 'Answer Review';
+    review.appendChild(heading);
+    questions.forEach((q, i) => {
+      const row = document.createElement('div');
+      row.className = 'review-item';
+      const isCorrect = answers[i] === q.correct;
+      row.classList.add(isCorrect ? 'correct' : 'wrong');
+      const status = document.createElement('span');
+      status.className = 'review-status';
+      status.textContent = isCorrect ? '\u2713' : '\u2717';
+      const body = document.createElement('div');
+      body.className = 'review-body';
+      const qLabel = document.createElement('strong');
+      qLabel.textContent = `Q${i + 1}. ${q.question}`;
+      body.appendChild(qLabel);
+      const detail = document.createElement('span');
+      detail.className = 'review-detail';
+      if (isCorrect) {
+        detail.textContent = `Your answer: ${q.options[answers[i]]}`;
+      } else {
+        const userAns = answers[i] !== null ? q.options[answers[i]] : '(not answered)';
+        detail.innerHTML = `Your answer: ${userAns} \u00b7 Correct answer: <strong>${q.options[q.correct]}</strong>`;
+      }
+      body.appendChild(detail);
+      row.appendChild(status);
+      row.appendChild(body);
+      review.appendChild(row);
+    });
+  }
+
+  startBtn.addEventListener('click', () => {
+    track('quiz_start', { quiz: quizSlug, total_questions: questions.length });
+    startDiv.style.display = 'none';
+    questionDiv.style.display = 'block';
+    renderQuestion(current);
+  });
+
+  prevBtn.addEventListener('click', () => {
+    if (current > 0) {
+      current--;
+      renderQuestion(current);
+    }
+  });
+
+  nextBtn.addEventListener('click', () => {
+    if (answers[current] === null) {
+      alert('Please select an answer before proceeding.');
+      return;
+    }
+    if (current === questions.length - 1) {
+      showResult();
+    } else {
+      current++;
+      renderQuestion(current);
+    }
+  });
+
+  restartBtn.addEventListener('click', () => {
+    current = 0;
+    answers = new Array(questions.length).fill(null);
+    resultDiv.style.display = 'none';
+    startDiv.style.display = 'block';
+  });
+</script>
+
+<style>
+  .quiz-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 2rem;
+  }
+  .quiz-card.centre {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+  }
+  .q-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+  .q-num {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--primary);
+    font-weight: 600;
+  }
+  .q-marks {
+    font-size: 0.8rem;
+    color: var(--muted);
+    background: var(--bg);
+    padding: 0.2rem 0.6rem;
+    border-radius: 6px;
+    font-weight: 600;
+  }
+  .q-text {
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin-bottom: 1.25rem;
+    line-height: 1.5;
+  }
+  .q-options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    margin-bottom: 1.5rem;
+  }
+  .q-option {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s;
+    font-size: 0.95rem;
+  }
+  .q-option:hover {
+    background: rgba(15, 185, 162, 0.04);
+    border-color: var(--primary);
+  }
+  .q-option.selected {
+    background: rgba(15, 185, 162, 0.08);
+    border-color: var(--primary);
+  }
+  .q-option input { display: none; }
+  .q-actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.75rem;
+  }
+  .btn {
+    padding: 0.6rem 1.4rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--surface);
+    color: var(--text);
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s;
+  }
+  .btn:hover { background: var(--bg); border-color: var(--muted); }
+  .btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+  .btn-primary {
+    background: var(--primary);
+    color: #fff;
+    border-color: var(--primary);
+  }
+  .btn-primary:hover { background: #0ea890; border-color: #0ea890; }
+  .result-icon { font-size: 3rem; }
+  .result-score {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--primary);
+  }
+  .result-msg {
+    color: var(--muted);
+    max-width: 400px;
+  }
+  .review {
+    width: 100%;
+    text-align: left;
+    margin-top: 1rem;
+  }
+  .review-heading {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .review-item {
+    display: flex;
+    gap: 0.75rem;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--border);
+    align-items: flex-start;
+  }
+  .review-item:last-child { border-bottom: none; }
+  .review-status {
+    font-size: 1.1rem;
+    font-weight: 700;
+    line-height: 1.4;
+    flex-shrink: 0;
+    width: 1.5rem;
+    text-align: center;
+  }
+  .review-item.correct .review-status { color: #16a34a; }
+  .review-item.wrong .review-status { color: #dc2626; }
+  .review-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    font-size: 0.9rem;
+  }
+  .review-body strong { font-size: 0.95rem; }
+  .review-detail { color: var(--muted); }
+</style>

@@ -1,0 +1,139 @@
+---
+import BlogLayout from '../../../layouts/BlogLayout.astro';
+import { quizMeta } from '../../../data/fopy-quiz.js';
+
+const chapterSlugs = Object.keys(quizMeta).filter(s => s.startsWith('chapter-'));
+const specialSlugs = Object.keys(quizMeta).filter(s => !s.startsWith('chapter-'));
+
+const siteUrl = 'https://faysalahmed.space';
+const canonical = `${siteUrl}/fopy/quiz/`;
+const ogImage = `${siteUrl}/og-image.svg`;
+---
+
+<BlogLayout title="Python Quizzes" description="Test your Python knowledge with chapter quizzes, a mid-book quiz, and a comprehensive final quiz." canonical={canonical} ogImage={ogImage}>
+  <nav class="breadcrumb">
+    <a href="/fopy">Fundamentals of Python</a>
+    <span> / Quizzes</span>
+  </nav>
+
+  <article class="quiz-hub">
+    <header>
+      <h1>Python Quizzes</h1>
+      <p class="lead">Reinforce your learning with interactive quizzes at every stage of the book.</p>
+    </header>
+
+    <section class="quiz-section">
+      <h2>Chapter Quizzes</h2>
+      <p class="section-desc">Each chapter has a 3-question quiz to check your understanding.</p>
+      <div class="quiz-grid">
+        {chapterSlugs.map(slug => {
+          const meta = quizMeta[slug];
+          const chapterNum = slug.replace('chapter-', '');
+          return (
+            <a href={`/fopy/quiz/${slug}/`} class="quiz-card-link" data-analytics-quiz={slug}>
+              <span class="quiz-chapter-num">Chapter {chapterNum}</span>
+              <span class="quiz-title">{meta.title}</span>
+              <span class="quiz-count">{meta.count} questions</span>
+            </a>
+          );
+        })}
+      </div>
+    </section>
+
+    <section class="quiz-section">
+      <h2>Mid-Book & Final Quizzes</h2>
+      <p class="section-desc">Larger cumulative quizzes to test broader knowledge.</p>
+      <div class="quiz-grid">
+        {specialSlugs.map(slug => {
+          const meta = quizMeta[slug];
+          return (
+            <a href={`/fopy/quiz/${slug}/`} class="quiz-card-link special" data-analytics-quiz={slug}>
+              <span class="quiz-chapter-num">{meta.title}</span>
+              <span class="quiz-title">{meta.description}</span>
+              <span class="quiz-count">{meta.count} questions</span>
+            </a>
+          );
+        })}
+      </div>
+    </section>
+  </article>
+</BlogLayout>
+
+<script>
+  import { track } from '../../../scripts/analytics.js';
+  document.querySelectorAll('[data-analytics-quiz]').forEach(el => {
+    el.addEventListener('click', function () {
+      track('quiz_nav', { book: 'fopy', quiz: this.dataset.analyticsQuiz });
+    });
+  });
+</script>
+
+<style>
+  .breadcrumb {
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin-bottom: 2rem;
+  }
+  .breadcrumb a { color: var(--muted); }
+  .breadcrumb a:hover { color: var(--accent); }
+  .quiz-hub header { margin-bottom: 2rem; }
+  .quiz-hub h1 { font-size: 2rem; }
+  .quiz-section {
+    margin-bottom: 2.5rem;
+  }
+  .quiz-section h2 {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+  }
+  .section-desc {
+    color: var(--muted);
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+  }
+  .quiz-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1rem;
+  }
+  .quiz-card-link {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    padding: 1.25rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    text-decoration: none;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .quiz-card-link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(2, 6, 23, 0.06);
+  }
+  .quiz-card-link.special {
+    border-color: var(--primary);
+    background: rgba(15, 185, 162, 0.03);
+  }
+  .quiz-card-link.special:hover {
+    border-color: var(--accent);
+  }
+  .quiz-chapter-num {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--primary);
+    font-weight: 600;
+  }
+  .quiz-card-link.special .quiz-chapter-num {
+    font-size: 0.85rem;
+  }
+  .quiz-title {
+    font-size: 1rem;
+    color: var(--text);
+    font-weight: 600;
+  }
+  .quiz-count {
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+</style>

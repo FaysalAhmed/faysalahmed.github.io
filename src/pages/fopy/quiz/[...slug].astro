@@ -1,0 +1,63 @@
+---
+import BlogLayout from '../../../layouts/BlogLayout.astro';
+import Quiz from '../../../components/Quiz.astro';
+import { chapterQuizzes, midQuiz, finalQuiz, quizMeta } from '../../../data/fopy-quiz.js';
+
+export async function getStaticPaths() {
+  const slugs = Object.keys(quizMeta);
+  return slugs.map(slug => ({
+    params: { slug },
+    props: { slug },
+  }));
+}
+
+const { slug } = Astro.props;
+const meta = quizMeta[slug];
+
+if (!meta) {
+  return Astro.redirect('/fopy/quiz/');
+}
+
+let questions;
+if (slug === 'mid') {
+  questions = midQuiz;
+} else if (slug === 'final') {
+  questions = finalQuiz;
+} else {
+  questions = chapterQuizzes[slug];
+}
+
+const siteUrl = 'https://faysalahmed.space';
+const canonical = `${siteUrl}/fopy/quiz/${slug}/`;
+const ogImage = `${siteUrl}/og-image.svg`;
+const pageTitle = `${meta.title}: ${meta.description} · Python Quiz`;
+const pageDescription = `Test your knowledge of ${meta.description} with this ${meta.count}-question interactive quiz.`;
+---
+
+<BlogLayout title={pageTitle} description={pageDescription} canonical={canonical} ogImage={ogImage}>
+  <nav class="breadcrumb">
+    <a href="/fopy">Fundamentals of Python</a>
+    <span> / <a href="/fopy/quiz/">Quizzes</a> / {meta.title}</span>
+  </nav>
+
+  <article class="quiz-page">
+    <header>
+      <h1>{meta.title}</h1>
+      <p class="lead">{meta.description} &mdash; {meta.count} question{meta.count !== 1 ? 's' : ''}.</p>
+    </header>
+
+    <Quiz questions={questions} quizTitle={meta.title} quizDescription={meta.description} />
+  </article>
+</BlogLayout>
+
+<style>
+  .breadcrumb {
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin-bottom: 2rem;
+  }
+  .breadcrumb a { color: var(--muted); }
+  .breadcrumb a:hover { color: var(--accent); }
+  .quiz-page header { margin-bottom: 2rem; }
+  .quiz-page h1 { font-size: 2rem; }
+</style>

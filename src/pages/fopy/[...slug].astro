@@ -1,0 +1,200 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const chapters = await getCollection('fopy');
+  return chapters.filter(c => !c.data.draft).map(c => ({
+    params: { slug: c.slug },
+    props: { chapter: c },
+  }));
+}
+
+const { chapter } = Astro.props;
+const { Content } = await chapter.render();
+
+const siteUrl = 'https://faysalahmed.space';
+const canonical = `${siteUrl}/fopy/${chapter.slug}/`;
+const ogImage = `${siteUrl}/og-image.svg`;
+const isArticle = chapter.data.chapter > 0;
+
+const allChapters = (await getCollection('fopy'))
+  .filter(c => !c.data.draft)
+  .sort((a, b) => a.data.chapter - b.data.chapter);
+
+const currentIdx = allChapters.findIndex(c => c.slug === chapter.slug);
+const prev = currentIdx > 0 ? allChapters[currentIdx - 1] : null;
+const next = currentIdx < allChapters.length - 1 ? allChapters[currentIdx + 1] : null;
+const isToc = chapter.data.chapter === 0;
+---
+
+<BlogLayout title={chapter.data.title} description={chapter.data.description} canonical={canonical} ogImage={ogImage} isArticle={isArticle} article={{ headline: chapter.data.title, description: chapter.data.description, url: canonical }}>
+  <nav class="breadcrumb">
+    <a href="/fopy">Fundamentals of Python</a>
+    {!isToc && <span> / {chapter.data.title}</span>}
+  </nav>
+
+  <article class="chapter">
+    {!isToc && (
+      <header>
+        <span class="chapter-num">Chapter {chapter.data.chapter}</span>
+        <h1>{chapter.data.title}</h1>
+      </header>
+    )}
+    <div class="content">
+      <Content />
+    </div>
+  </article>
+
+  <nav class="pagination">
+    {prev ? (
+      <a href={`/fopy/${prev.slug}/`} class="prev" data-analytics-nav-direction="prev">
+        <span class="dir">Previous</span>
+        <span class="title">{prev.data.title}</span>
+      </a>
+    ) : <span />}
+    {next && next.data.chapter > 0 && (
+      <a href={`/fopy/${next.slug}/`} class="next" data-analytics-nav-direction="next">
+        <span class="dir">Next</span>
+        <span class="title">{next.data.title}</span>
+      </a>
+    )}
+  </nav>
+
+  <nav class="quiz-link">
+    <a href={`/fopy/quiz/${chapter.slug}/`} class="quiz-cta" data-analytics-quiz={chapter.data.chapter}>
+      Take the Chapter {chapter.data.chapter} Quiz →
+    </a>
+    {chapter.data.chapter === 5 && (
+      <a href="/fopy/quiz/mid/" class="quiz-cta mid" data-analytics-quiz="mid">
+        Take the Mid-Book Quiz →
+      </a>
+    )}
+    {chapter.data.chapter === 10 && (
+      <a href="/fopy/quiz/final/" class="quiz-cta final" data-analytics-quiz="final">
+        Take the Final Quiz →
+      </a>
+    )}
+  </nav>
+</BlogLayout>
+
+<script>
+  import { track } from '../../scripts/analytics.js';
+  document.querySelectorAll('[data-analytics-nav-direction]').forEach(el => {
+    el.addEventListener('click', function () {
+      track('chapter_nav', { book: 'fopy', direction: this.dataset.analyticsNavDirection, chapter_title: this.querySelector('.title')?.textContent?.trim() });
+    });
+  });
+  document.querySelectorAll('[data-analytics-quiz]').forEach(el => {
+    el.addEventListener('click', function () {
+      track('quiz_nav', { book: 'fopy', quiz: this.dataset.analyticsQuiz });
+    });
+  });
+</script>
+
+<style>
+  .breadcrumb {
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin-bottom: 2rem;
+  }
+  .breadcrumb a { color: var(--muted); }
+  .breadcrumb a:hover { color: var(--accent); }
+  .chapter header {
+    margin-bottom: 2rem;
+  }
+  .chapter-num {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--primary);
+    font-weight: 600;
+  }
+  .chapter h1 {
+    font-size: 2rem;
+    line-height: 1.3;
+    margin-top: 0.25rem;
+  }
+  .content {
+    font-size: 1rem;
+    line-height: 1.8;
+  }
+  .content h2 { font-size: 1.4rem; margin: 1.5rem 0 0.75rem; }
+  .content h3 { font-size: 1.15rem; margin: 1.25rem 0 0.5rem; }
+  .content p { margin-bottom: 1rem; }
+  .content ul, .content ol { margin: 0 0 1rem 1.5rem; }
+  .content li { margin-bottom: 0.25rem; }
+  .content blockquote {
+    border-left: 3px solid var(--primary);
+    padding-left: 1rem;
+    margin: 1rem 0;
+    color: var(--muted);
+  }
+  .content pre { margin: 1rem 0; }
+  .content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    font-size: 0.9rem;
+  }
+  .content th, .content td {
+    border: 1px solid var(--border);
+    padding: 0.5rem 0.75rem;
+    text-align: left;
+  }
+  .content th {
+    background: rgba(2, 6, 23, 0.03);
+    font-weight: 600;
+  }
+  .pagination {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+    gap: 1rem;
+  }
+  .pagination a {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    text-decoration: none;
+    max-width: 50%;
+  }
+  .pagination a.next { align-items: flex-end; text-align: right; }
+  .dir {
+    font-size: 0.8rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .title {
+    font-size: 0.95rem;
+    color: var(--text);
+    font-weight: 600;
+  }
+  .pagination a:hover .title { color: var(--accent); }
+  .quiz-link {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+  }
+  .quiz-cta {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    background: var(--primary);
+    color: #fff;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+    text-align: center;
+    transition: background 0.15s;
+  }
+  .quiz-cta:hover { background: #0ea890; color: #fff; }
+  .quiz-cta.mid, .quiz-cta.final { background: var(--accent); }
+  .quiz-cta.mid:hover, .quiz-cta.final:hover { background: #0973e0; }
+</style>

@@ -1,0 +1,112 @@
+---
+import BlogLayout from '../../layouts/BlogLayout.astro';
+import { getCollection } from 'astro:content';
+
+const chapters = (await getCollection('fopy'))
+  .filter(p => !p.data.draft)
+  .sort((a, b) => a.data.chapter - b.data.chapter);
+
+const toc = chapters.find(c => c.data.chapter === 0);
+const content = chapters.filter(c => c.data.chapter > 0);
+
+const siteUrl = 'https://faysalahmed.space';
+const canonical = `${siteUrl}/fopy/`;
+const ogImage = `${siteUrl}/og-image.svg`;
+---
+
+<BlogLayout title="Fundamentals of Python" description="Complete guide to Python programming — from syntax basics and data structures to OOP, modules, error handling, and real-world libraries." canonical={canonical} ogImage={ogImage}>
+  <section class="hero">
+    <h1>Fundamentals of Python</h1>
+    <p>A hands-on guide to learning Python from scratch. Covers variables, control flow, functions, data structures, OOP, file I/O, modules, error handling, and popular libraries — with interactive quizzes at every stage.</p>
+  </section>
+
+  {toc && (
+    <section class="toc">
+      <h2>Table of Contents</h2>
+      <ol class="chapter-list">
+        {content.map(chapter => (
+          <li>
+            <article>
+              <span class="chapter-num">Chapter {chapter.data.chapter}</span>
+              <h3><a href={`/fopy/${chapter.slug}/`} data-analytics-chapter={chapter.data.chapter}>{chapter.data.title}</a></h3>
+              <p>{chapter.data.description}</p>
+            </article>
+          </li>
+        ))}
+        <li>
+          <article>
+            <span class="chapter-num">Quizzes</span>
+            <h3><a href="/fopy/quiz/" data-analytics-chapter="quiz">Test Your Knowledge</a></h3>
+            <p>Chapter quizzes (3 questions each), a mid-book quiz (5 questions), and a final quiz (20 questions).</p>
+          </article>
+        </li>
+      </ol>
+    </section>
+  )}
+</BlogLayout>
+
+<script>
+  import { track } from '../../scripts/analytics.js';
+  document.querySelectorAll('[data-analytics-chapter]').forEach(el => {
+    el.addEventListener('click', function () {
+      track('chapter_click', { book: 'fopy', chapter: this.dataset.analyticsChapter, chapter_title: this.textContent.trim() });
+    });
+  });
+</script>
+
+<style>
+  .hero {
+    margin-bottom: 3rem;
+  }
+  .hero h1 {
+    font-size: 2rem;
+    margin-bottom: 0.75rem;
+  }
+  .hero p {
+    color: var(--muted);
+    max-width: 600px;
+  }
+  .toc h2 {
+    font-size: 1.25rem;
+    margin-bottom: 1.5rem;
+  }
+  .chapter-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .chapter-list article {
+    padding: 1rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .chapter-list article:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(2, 6, 23, 0.06);
+  }
+  .chapter-num {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--primary);
+    font-weight: 600;
+  }
+  .chapter-list h3 {
+    font-size: 1.1rem;
+    margin: 0.25rem 0;
+  }
+  .chapter-list h3 a {
+    color: var(--text);
+  }
+  .chapter-list h3 a:hover {
+    color: var(--accent);
+  }
+  .chapter-list p {
+    color: var(--muted);
+    font-size: 0.9rem;
+    margin: 0;
+  }
+</style>

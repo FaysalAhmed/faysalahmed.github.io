@@ -55,4 +55,15 @@ const fmopm = defineCollection({
   }),
 });
 
-export const collections = { blog, fosa, fopm, hai, fmopm };
+const fopy = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    chapter: z.number(),
+    slug: z.string().optional(),
+    draft: z.boolean().default(false),
+  }),
+});
+
+export const collections = { blog, fosa, fopm, hai, fmopm, fopy };
