@@ -1,7 +1,7 @@
 ---
 title: "Ownership, Autonomy, and Business Impact"
 description: "How senior engineers shift from task execution to owning outcomes and driving measurable business results."
-date: 2026-05-24
+date: 2026-05-22
 tags: ["career", "senior", "engineering", "ownership", "impact"]
 draft: false
 ---

@@ -1,7 +1,7 @@
 ---
 title: "Common Pitfalls on the Path to Senior Engineer and How to Avoid Them"
 description: "The mistakes that slow down or derail mid-level engineers on their path to senior — and how to recognise and avoid each one."
-date: 2026-05-28
+date: 2026-05-22
 tags: ["career", "senior", "engineering", "pitfalls", "path-to-senior"]
 draft: false
 ---

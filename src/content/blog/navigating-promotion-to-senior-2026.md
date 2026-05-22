@@ -1,7 +1,7 @@
 ---
 title: "Navigating the Promotion Process to Senior Engineer"
 description: "How promotion processes work at most companies and a practical strategy for building a compelling case for senior engineer."
-date: 2026-05-26
+date: 2026-05-22
 tags: ["career", "senior", "engineering", "promotion", "path-to-senior"]
 draft: false
 ---

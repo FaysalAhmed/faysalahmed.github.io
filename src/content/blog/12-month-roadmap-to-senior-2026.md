@@ -1,7 +1,7 @@
 ---
 title: "A Practical 12-Month Roadmap to Senior Software Engineer"
 description: "A concrete, month-by-month plan for mid-level engineers aiming to reach senior engineer within a year."
-date: 2026-05-27
+date: 2026-05-22
 tags: ["career", "senior", "engineering", "roadmap", "path-to-senior"]
 draft: false
 ---

@@ -1,7 +1,7 @@
 ---
 title: "Mastering Technical Depth: Systems Thinking and Design"
 description: "How to develop the technical depth expected of a senior engineer — from systems thinking to architecture design and debugging at scale."
-date: 2026-05-23
+date: 2026-05-22
 tags: ["career", "senior", "engineering", "technical-depth", "architecture"]
 draft: false
 ---

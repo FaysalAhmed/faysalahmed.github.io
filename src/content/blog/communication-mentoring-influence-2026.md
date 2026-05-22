@@ -1,7 +1,7 @@
 ---
 title: "Communication, Mentoring, and Influence Without Authority"
 description: "The soft skills that separate senior engineers — clear communication, effective mentoring, and influencing decisions without direct authority."
-date: 2026-05-25
+date: 2026-05-22
 tags: ["career", "senior", "engineering", "communication", "mentoring", "leadership"]
 draft: false
 ---
