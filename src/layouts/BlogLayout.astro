@@ -19,6 +19,11 @@ const rawSite = Astro.site ?? 'https://faysalahmed.space';
 const siteUrl = typeof rawSite === 'string' ? rawSite : String(rawSite);
 const canonicalUrl = canonical ?? siteUrl;
 const imageUrl = ogImage ?? `${siteUrl.replace(/\/$/, '')}/og-image.svg`;
+const pageTitle = title 
+  ? (title.includes('Faysal Ahmed') ? title : `${title} · Faysal Ahmed`) 
+  : 'Faysal Ahmed | Senior IT Consultant & Systems Architect';
+const pageDescription = description 
+  ?? 'Strategic IT consulting, enterprise cloud architecture, cybersecurity, and fractional CTO advisory by Faysal Ahmed.';
 ---
 
 <!doctype html>
@@ -26,15 +31,15 @@ const imageUrl = ogImage ?? `${siteUrl.replace(/\/$/, '')}/og-image.svg`;
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{title ? `${title} · Faysal Ahmed` : 'Faysal Ahmed'}</title>
-    {description && <meta name="description" content={description} />}
-    <meta name="keywords" content="Top Software Engineers in Bangladesh" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={pageDescription} />
+    <meta name="keywords" content="IT Consultant, Systems Architect, Enterprise Architecture, Cloud Migration, Fractional CTO, Cybersecurity, DevOps, Faysal Ahmed" />
     {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
 
     <!-- Open Graph / Facebook -->
-    <meta property="og:site_name" content="Faysal Ahmed" />
-    <meta property="og:title" content={title ? `${title} · Faysal Ahmed` : 'Faysal Ahmed'} />
-    {description && <meta property="og:description" content={description} />}
+    <meta property="og:site_name" content="Faysal Ahmed · IT Consulting & Systems Architecture" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDescription} />
     <meta property="og:type" content={isArticle ? 'article' : 'website'} />
     {canonicalUrl && <meta property="og:url" content={canonicalUrl} />}
     <meta property="og:image" content={imageUrl} />
@@ -43,8 +48,8 @@ const imageUrl = ogImage ?? `${siteUrl.replace(/\/$/, '')}/og-image.svg`;
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={title ? `${title} · Faysal Ahmed` : 'Faysal Ahmed'} />
-    {description && <meta name="twitter:description" content={description} />}
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={pageDescription} />
     <meta name="twitter:image" content={imageUrl} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
@@ -56,6 +61,30 @@ const imageUrl = ogImage ?? `${siteUrl.replace(/\/$/, '')}/og-image.svg`;
       gtag('js', new Date());
       gtag('config', 'G-BM2F8QWHK8');
     </script>
+    <!-- Structured data for site/person and optional Article payload -->
+    <script type="application/ld+json" is:inline set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "url": siteUrl,
+          "name": "Faysal Ahmed · IT Consulting & Systems Architecture",
+          "description": "Strategic IT consulting, enterprise cloud architecture, cybersecurity, and fractional CTO advisory by Faysal Ahmed."
+        },
+        {
+          "@type": "Person",
+          "name": "Faysal Ahmed",
+          "jobTitle": "Senior IT Consultant & Systems Architect",
+          "url": siteUrl
+        }
+      ].concat(isArticle && article ? [{
+        "@type": "Article",
+        "headline": article.headline,
+        "description": article.description,
+        "url": article.url,
+        "author": { "@type": "Person", "name": "Faysal Ahmed" }
+      }] : [])
+    })} />
   </head>
   <body>
     <Header />
@@ -75,33 +104,6 @@ const imageUrl = ogImage ?? `${siteUrl.replace(/\/$/, '')}/og-image.svg`;
     <Footer />
   </body>
 </html>
-
-
-{/** Structured data for site/person and optional Article payload **/}
-<script type="application/ld+json">
-{JSON.stringify({
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "WebSite",
-      "url": siteUrl,
-      "name": "Faysal Ahmed",
-      "description": "Articles about development, design and projects by Faysal Ahmed."
-    },
-    {
-      "@type": "Person",
-      "name": "Faysal Ahmed",
-      "url": siteUrl
-    }
-  ].concat(isArticle && article ? [{
-    "@type": "Article",
-    "headline": article.headline,
-    "description": article.description,
-    "url": article.url,
-    "author": { "@type": "Person", "name": "Faysal Ahmed" }
-  }] : [])
-})}
-</script>
 
 <style is:global>
   main {
