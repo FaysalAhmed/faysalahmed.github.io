@@ -62,9 +62,9 @@ const { title = "Faysal Ahmed" } = Astro.props;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    background: rgba(15, 185, 162, 0.12);
-    color: #0d8272;
-    padding: 0.2rem 0.5rem;
+    background: rgba(2, 132, 199, 0.12);
+    color: #0369a1;
+    padding: 0.2rem 0.55rem;
     border-radius: 4px;
   }
   nav {
@@ -79,20 +79,22 @@ const { title = "Faysal Ahmed" } = Astro.props;
     transition: color 0.15s ease;
   }
   nav a:hover {
-    color: var(--text);
+    color: #0284c7;
     text-decoration: none;
   }
   .btn-nav {
-    background: var(--text);
+    background: linear-gradient(135deg, #0284c7 0%, #1e40af 100%);
     color: #ffffff !important;
-    padding: 0.35rem 0.85rem;
+    padding: 0.4rem 0.95rem;
     border-radius: 6px;
     font-size: 0.85rem;
     font-weight: 600;
-    transition: background 0.15s ease, transform 0.1s ease;
+    box-shadow: 0 2px 8px rgba(2, 132, 199, 0.3);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
   }
   .btn-nav:hover {
-    background: #1e293b;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 14px rgba(2, 132, 199, 0.45);
     text-decoration: none !important;
   }
 

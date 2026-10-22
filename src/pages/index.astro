@@ -515,8 +515,8 @@ const engagementModels = [
     font-size: 0.78rem;
     font-weight: 700;
     letter-spacing: 0.08em;
-    color: #0d8272;
-    background: rgba(15, 185, 162, 0.1);
+    color: #0284c7;
+    background: rgba(2, 132, 199, 0.1);
     padding: 0.3rem 0.75rem;
     border-radius: 6px;
     display: inline-block;
@@ -525,8 +525,8 @@ const engagementModels = [
   /* Hero Section */
   .hero-section {
     padding: 5rem 0 5.5rem 0;
-    background: radial-gradient(circle at 85% 15%, rgba(14, 165, 233, 0.09), transparent 45%),
-                radial-gradient(circle at 15% 85%, rgba(15, 185, 162, 0.07), transparent 40%),
+    background: radial-gradient(circle at 85% 15%, rgba(14, 165, 233, 0.12), transparent 45%),
+                radial-gradient(circle at 15% 85%, rgba(30, 58, 138, 0.08), transparent 40%),
                 #ffffff;
     border-bottom: 1px solid var(--border);
   }
@@ -544,9 +544,9 @@ const engagementModels = [
     display: inline-flex;
     align-items: center;
     gap: 0.6rem;
-    background: rgba(16, 185, 129, 0.08);
-    color: #065f46;
-    border: 1px solid rgba(16, 185, 129, 0.25);
+    background: rgba(2, 132, 199, 0.08);
+    color: #0369a1;
+    border: 1px solid rgba(2, 132, 199, 0.25);
     padding: 0.4rem 0.95rem;
     border-radius: 999px;
     font-size: 0.85rem;
@@ -556,9 +556,9 @@ const engagementModels = [
   .status-indicator {
     width: 8px;
     height: 8px;
-    background: #10b981;
+    background: #0ea5e9;
     border-radius: 50%;
-    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.3);
+    box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.3);
   }
   .hero-title {
     font-size: 3.25rem;
@@ -569,7 +569,7 @@ const engagementModels = [
     margin-bottom: 1.35rem;
   }
   .gradient-text {
-    background: linear-gradient(135deg, #0f766e 0%, #0284c7 100%);
+    background: linear-gradient(135deg, #0284c7 0%, #1d4ed8 50%, #1e3a8a 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
@@ -615,11 +615,11 @@ const engagementModels = [
   .image-glow {
     position: absolute;
     inset: -12px;
-    background: linear-gradient(135deg, rgba(14, 165, 233, 0.3), rgba(15, 185, 162, 0.25));
+    background: linear-gradient(135deg, rgba(14, 165, 233, 0.35), rgba(30, 58, 138, 0.3));
     border-radius: 30px;
     filter: blur(20px);
     z-index: -1;
-    opacity: 0.75;
+    opacity: 0.8;
   }
   .hero-profile-img {
     width: 100%;
@@ -694,14 +694,14 @@ const engagementModels = [
     border: 1px solid transparent;
   }
   .btn-primary {
-    background: var(--text);
+    background: linear-gradient(135deg, #0284c7 0%, #1e40af 100%);
     color: #ffffff !important;
-    box-shadow: 0 4px 14px rgba(15, 23, 42, 0.16);
+    box-shadow: 0 4px 14px rgba(2, 132, 199, 0.35);
   }
   .btn-primary:hover {
-    background: #1e293b;
+    background: linear-gradient(135deg, #0369a1 0%, #1e3a8a 100%);
     transform: translateY(-1px);
-    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.22);
+    box-shadow: 0 8px 22px rgba(2, 132, 199, 0.45);
     text-decoration: none;
   }
   .btn-secondary {
@@ -711,14 +711,16 @@ const engagementModels = [
   }
   .btn-secondary:hover {
     background: #e2e8f0;
+    color: #0284c7 !important;
     text-decoration: none;
   }
   .btn-text {
-    color: #0d8272 !important;
+    color: #0284c7 !important;
     font-weight: 600;
     padding: 0.85rem 1rem;
   }
   .btn-text:hover {
+    color: #1e40af !important;
     text-decoration: underline;
   }
   .btn-outline {
@@ -729,7 +731,9 @@ const engagementModels = [
     justify-content: center;
   }
   .btn-outline:hover {
-    background: rgba(15, 23, 42, 0.04);
+    background: rgba(2, 132, 199, 0.06);
+    border-color: #0284c7;
+    color: #0284c7 !important;
     text-decoration: none;
   }
 
@@ -783,7 +787,7 @@ const engagementModels = [
   .service-card:hover {
     transform: translateY(-4px);
     box-shadow: 0 16px 36px rgba(15, 23, 42, 0.09);
-    border-color: rgba(15, 185, 162, 0.4);
+    border-color: rgba(2, 132, 199, 0.45);
   }
   .service-image-box {
     position: relative;
@@ -839,8 +843,8 @@ const engagementModels = [
     width: 44px;
     height: 44px;
     border-radius: 10px;
-    background: rgba(15, 185, 162, 0.1);
-    color: #0f766e;
+    background: rgba(2, 132, 199, 0.1);
+    color: #0284c7;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -876,7 +880,7 @@ const engagementModels = [
     line-height: 1.45;
   }
   .check-icon {
-    color: #0f766e;
+    color: #0284c7;
     flex-shrink: 0;
     margin-top: 2px;
   }
@@ -904,8 +908,8 @@ const engagementModels = [
   .step-num {
     font-size: 2.25rem;
     font-weight: 850;
-    color: #0f766e;
-    opacity: 0.4;
+    color: #0284c7;
+    opacity: 0.45;
     line-height: 1;
     margin-bottom: 1rem;
     font-family: ui-monospace, SFMono-Regular, monospace;
@@ -941,7 +945,7 @@ const engagementModels = [
   .impact-glow {
     position: absolute;
     inset: -12px;
-    background: linear-gradient(135deg, rgba(14, 165, 233, 0.25), rgba(15, 185, 162, 0.2));
+    background: linear-gradient(135deg, rgba(14, 165, 233, 0.35), rgba(30, 58, 138, 0.25));
     border-radius: 28px;
     filter: blur(22px);
     z-index: 0;
@@ -1019,8 +1023,8 @@ const engagementModels = [
     width: 28px;
     height: 28px;
     border-radius: 8px;
-    background: rgba(15, 185, 162, 0.12);
-    color: #0f766e;
+    background: rgba(2, 132, 199, 0.12);
+    color: #0284c7;
     font-weight: 700;
     display: flex;
     align-items: center;
@@ -1062,14 +1066,14 @@ const engagementModels = [
     box-shadow: 0 4px 18px rgba(15, 23, 42, 0.03);
   }
   .model-card.featured {
-    border: 2px solid #0f766e;
-    box-shadow: 0 12px 36px rgba(15, 118, 110, 0.14);
+    border: 2px solid #0284c7;
+    box-shadow: 0 12px 36px rgba(2, 132, 199, 0.16);
   }
   .popular-badge {
     position: absolute;
     top: -13px;
     left: 2rem;
-    background: #0f766e;
+    background: linear-gradient(135deg, #0284c7 0%, #1e40af 100%);
     color: #ffffff;
     font-size: 0.72rem;
     font-weight: 700;
@@ -1089,7 +1093,7 @@ const engagementModels = [
   .model-timeline {
     font-size: 0.8rem;
     font-weight: 600;
-    color: #0f766e;
+    color: #0284c7;
     display: block;
     margin-top: 0.25rem;
   }
@@ -1141,8 +1145,8 @@ const engagementModels = [
   }
   .insight-card:hover {
     transform: translateY(-3px);
-    border-color: rgba(15, 23, 42, 0.2);
-    box-shadow: 0 12px 28px rgba(15, 23, 42, 0.08);
+    border-color: rgba(2, 132, 199, 0.35);
+    box-shadow: 0 12px 28px rgba(2, 132, 199, 0.1);
   }
   .insight-thumb-box {
     position: relative;
@@ -1182,7 +1186,7 @@ const engagementModels = [
     color: var(--text);
   }
   .insight-card h3 a:hover {
-    color: #0f766e;
+    color: #0284c7;
   }
   .insight-card p {
     font-size: 0.92rem;
@@ -1206,10 +1210,11 @@ const engagementModels = [
   .all-link {
     font-size: 1rem;
     font-weight: 600;
-    color: #0f766e;
+    color: #0284c7;
     text-decoration: none;
   }
   .all-link:hover {
+    color: #1e40af;
     text-decoration: underline;
   }
 
@@ -1257,16 +1262,18 @@ const engagementModels = [
     margin-bottom: 2.75rem;
   }
   .btn-contact-primary {
-    background: #0ea5e9;
+    background: linear-gradient(135deg, #0ea5e9 0%, #1e40af 100%);
     color: #ffffff !important;
     font-weight: 600;
     font-size: 1.05rem;
     padding: 0.95rem 1.85rem;
     box-shadow: 0 6px 20px rgba(14, 165, 233, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.15);
   }
   .btn-contact-primary:hover {
-    background: #0284c7;
+    background: linear-gradient(135deg, #0284c7 0%, #1e3a8a 100%);
     transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(14, 165, 233, 0.5);
     text-decoration: none;
   }
   .btn-contact-secondary {
