@@ -4,11 +4,16 @@ const { title = "Faysal Ahmed" } = Astro.props;
 
 <header>
   <div class="inner">
-    <a href="/" class="brand">Faysal Ahmed</a>
+    <a href="/" class="brand">
+      <span class="brand-name">Faysal Ahmed</span>
+      <span class="brand-tag">IT Consultant</span>
+    </a>
     <nav>
-      <a href="/" data-analytics-nav="Home">Home</a>
-      <a href="/blog" data-analytics-nav="Blog">Blog</a>
+      <a href="/#services" data-analytics-nav="Services">Services</a>
+      <a href="/#approach" data-analytics-nav="Approach">Approach</a>
+      <a href="/blog" data-analytics-nav="Blog">Insights</a>
       <a href="/books" data-analytics-nav="Books">Books</a>
+      <a href="/#contact" class="btn-nav" data-analytics-nav="Contact">Contact</a>
     </nav>
   </div>
 </header>
@@ -24,24 +29,83 @@ const { title = "Faysal Ahmed" } = Astro.props;
   header {
     border-bottom: 1px solid var(--border);
     background: var(--surface);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    backdrop-filter: blur(8px);
+    background: rgba(255, 255, 255, 0.95);
   }
   .inner {
-    max-width: 800px;
+    max-width: 1020px;
     margin: 0 auto;
-    padding: 1rem 1.5rem;
+    padding: 0.9rem 1.5rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
   }
   .brand {
-    font-weight: 700;
-    font-size: 1.1rem;
-    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    text-decoration: none;
   }
-  nav { display: flex; gap: 1.25rem; }
+  .brand-name {
+    font-weight: 700;
+    font-size: 1.15rem;
+    color: var(--text);
+    letter-spacing: -0.02em;
+  }
+  .brand-tag {
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    background: rgba(15, 185, 162, 0.12);
+    color: #0d8272;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+  }
+  nav {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+  }
   nav a {
     color: var(--muted);
     font-size: 0.9rem;
+    font-weight: 500;
+    transition: color 0.15s ease;
   }
-  nav a:hover { color: var(--text); text-decoration: none; }
+  nav a:hover {
+    color: var(--text);
+    text-decoration: none;
+  }
+  .btn-nav {
+    background: var(--text);
+    color: #ffffff !important;
+    padding: 0.35rem 0.85rem;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: background 0.15s ease, transform 0.1s ease;
+  }
+  .btn-nav:hover {
+    background: #1e293b;
+    text-decoration: none !important;
+  }
+
+  @media (max-width: 640px) {
+    .inner {
+      padding: 0.75rem 1rem;
+    }
+    nav {
+      gap: 0.85rem;
+      font-size: 0.85rem;
+    }
+    .brand-tag {
+      display: none;
+    }
+  }
 </style>

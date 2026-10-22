@@ -5,32 +5,287 @@ import { getCollection } from 'astro:content';
 const posts = (await getCollection('blog'))
   .filter(p => !p.data.draft)
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-  .slice(0, 5);
+  .slice(0, 4);
+
+const services = [
+  {
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/></svg>`,
+    title: 'Cloud Migration & Infrastructure Engineering',
+    description: 'Design and execute zero-downtime migrations to AWS, GCP, and Azure. Build containerized, auto-scaling infrastructures with Infrastructure as Code (Terraform) and Kubernetes.',
+    highlights: ['Cloud Readiness Audits & Cost Optimization (FinOps)', 'Kubernetes (EKS/GKE) Orchestration', 'Automated CI/CD Pipelines & GitOps Workflows', 'Disaster Recovery & High-Availability Topologies']
+  },
+  {
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>`,
+    title: 'Enterprise Architecture & System Modernization',
+    description: 'Transform legacy monoliths into resilient, decoupled microservices. Design scalable, event-driven backends capable of handling demanding transaction volumes.',
+    highlights: ['Monolith-to-Microservices Decomposition Strategy', 'Event-Driven Architectures (Kafka, RabbitMQ, SQS)', 'Database Scaling, Read-Replicas & Caching Layers', 'REST, GraphQL & gRPC API Ecosystem Design']
+  },
+  {
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>`,
+    title: 'Cybersecurity, Zero-Trust & DevSecOps',
+    description: 'Embed security into the core of your software development lifecycle. Identify vulnerabilities, strengthen network defenses, and prepare for industry compliance benchmarks.',
+    highlights: ['Threat Modeling & Attack Surface Assessments', 'Shift-Left DevSecOps & Automated Code Scans', 'Zero-Trust Architecture & IAM Hardening', 'SOC 2, ISO 27001 & Regulatory Alignment Guidance']
+  },
+  {
+    icon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>`,
+    title: 'Fractional CTO & Technical Advisory',
+    description: 'Provide executive technical leadership for startups and scale-ups. Define high-impact technology roadmaps, mentor engineering managers, and evaluate third-party vendors.',
+    highlights: ['Technology Stack Selection & Architecture Governance', 'Engineering Velocity & DORA Metrics Improvement', 'Technical Due Diligence for Investors & M&A', 'Team Topology Design & Senior Engineer Mentorship']
+  }
+];
+
+const processSteps = [
+  {
+    step: '01',
+    title: 'Discovery & System Audit',
+    description: 'Comprehensive review of your architecture, deployment pipelines, team bottlenecks, and business objectives to pinpoint high-leverage opportunities.'
+  },
+  {
+    step: '02',
+    title: 'Strategic Architecture Blueprint',
+    description: 'Development of an actionable, prioritized roadmap complete with architectural diagrams, risk mitigation strategies, and ROI forecasts.'
+  },
+  {
+    step: '03',
+    title: 'Hands-on Co-Engineering',
+    description: 'Working side-by-side with your technical leads to build foundational components, establish best practices, and automate delivery pipelines.'
+  },
+  {
+    step: '04',
+    title: 'Validation, Handover & Scale',
+    description: 'Rigorous load testing, security verification, comprehensive operational runbooks, and ongoing advisory to guarantee sustained success.'
+  }
+];
+
+const engagementModels = [
+  {
+    name: 'Targeted Technical Audit',
+    bestFor: 'Teams facing performance, security, or scaling bottlenecks',
+    features: [
+      'Comprehensive codebase & architecture review',
+      'Infrastructure cost & security vulnerability scan',
+      'Detailed findings report with prioritized action items',
+      'Executive presentation & debrief session'
+    ]
+  },
+  {
+    name: 'Project-Based Implementation',
+    bestFor: 'Defined transformations like cloud migrations or monolith splits',
+    popular: true,
+    features: [
+      'Full technical ownership of the architecture stream',
+      'Hands-on implementation of core infrastructure & APIs',
+      'CI/CD pipeline automation & environment provisioning',
+      'Engineer pairing and comprehensive documentation'
+    ]
+  },
+  {
+    name: 'Fractional CTO / Advisory Retainer',
+    bestFor: 'Growing companies seeking ongoing senior technical guidance',
+    features: [
+      'Weekly architectural reviews & roadmap alignment',
+      'Hiring support & technical interviews for key hires',
+      'Escalation support for critical production decisions',
+      'Vendor evaluations and investor tech presentations'
+    ]
+  }
+];
 ---
 
-<BlogLayout title="Blog" description="Articles about development, design and projects by Faysal Ahmed.">
-  <section class="hero">
-    <h1>Welcome</h1>
-    <p>I'm Faysal Ahmed — incoming Product Manager at Envobyte. I write about software engineering, cybersecurity, data science, and building internal tools that make teams more effective.</p>
+<BlogLayout 
+  title="IT Consultant & Systems Architect" 
+  description="Strategic IT consulting, enterprise cloud architecture, cybersecurity, and fractional CTO advisory by Faysal Ahmed."
+>
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="availability-badge">
+      <span class="status-indicator"></span>
+      <span>Available for Consulting & Advisory Engagements</span>
+    </div>
+
+    <h1 class="hero-title">
+      Strategic IT Consulting for <span class="gradient-text">Scalable, Resilient Systems</span>
+    </h1>
+
+    <p class="hero-lead">
+      I partner with business leaders and engineering teams to modernize legacy architectures, accelerate cloud migrations, fortify cybersecurity, and scale reliable software products.
+    </p>
+
+    <div class="hero-actions">
+      <a href="#contact" class="btn btn-primary" data-analytics-cta="Book Consultation Hero">
+        Schedule a Consultation &rarr;
+      </a>
+      <a href="#services" class="btn btn-secondary" data-analytics-cta="View Services Hero">
+        Explore Services
+      </a>
+    </div>
+
+    <!-- Highlights Bar -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <span class="stat-title">Cloud & DevOps</span>
+        <span class="stat-subtitle">AWS · GCP · Kubernetes · IaC</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-title">System Architecture</span>
+        <span class="stat-subtitle">Microservices · Event-Driven · High-Load</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-title">Cybersecurity</span>
+        <span class="stat-subtitle">Zero-Trust · Threat Modeling · DevSecOps</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-title">Leadership</span>
+        <span class="stat-subtitle">Fractional CTO · Due Diligence · Roadmaps</span>
+      </div>
+    </div>
   </section>
 
-  <section class="recent-posts">
-    <h2>Recent Posts</h2>
-    <ul class="post-list">
-      {posts.map(post => (
-        <li>
-          <article>
-            <time datetime={post.data.date.toISOString()}>{post.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}</time>
-            <h3><a href={`/blog/${post.id}`} data-analytics-post={post.data.title}>{post.data.title}</a></h3>
-            <p>{post.data.description}</p>
-            <div class="tags">
-              {post.data.tags.map(tag => <span class="tag">{tag}</span>)}
-            </div>
-          </article>
-        </li>
+  <!-- Services Section -->
+  <section id="services" class="section services-section">
+    <div class="section-header">
+      <span class="section-tag">CONSULTING SERVICES</span>
+      <h2>Specialized Technical Solutions</h2>
+      <p>Targeted expertise designed to resolve high-stakes technical bottlenecks and future-proof your digital operations.</p>
+    </div>
+
+    <div class="services-grid">
+      {services.map(service => (
+        <div class="service-card">
+          <div class="service-icon" set:html={service.icon} />
+          <h3>{service.title}</h3>
+          <p class="service-desc">{service.description}</p>
+          <ul class="service-highlights">
+            {service.highlights.map(item => (
+              <li>
+                <svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
       ))}
-    </ul>
-    <a href="/blog" class="all-posts" data-analytics-cta="View all posts">View all posts &rarr;</a>
+    </div>
+  </section>
+
+  <!-- Process Section -->
+  <section id="approach" class="section process-section">
+    <div class="section-header">
+      <span class="section-tag">ENGAGEMENT PROCESS</span>
+      <h2>How We Work Together</h2>
+      <p>A proven, structured approach that balances rigorous technical standards with business milestones and speed.</p>
+    </div>
+
+    <div class="process-grid">
+      {processSteps.map(step => (
+        <div class="process-card">
+          <div class="step-num">{step.step}</div>
+          <h3>{step.title}</h3>
+          <p>{step.description}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Engagement Models Section -->
+  <section class="section models-section">
+    <div class="section-header">
+      <span class="section-tag">COLLABORATION FORMATS</span>
+      <h2>Flexible Engagement Models</h2>
+      <p>Engage in the way that best matches your organization's timeline, budget, and internal capabilities.</p>
+    </div>
+
+    <div class="models-grid">
+      {engagementModels.map(model => (
+        <div class={`model-card ${model.popular ? 'featured' : ''}`}>
+          {model.popular && <div class="popular-badge">Most Requested</div>}
+          <h3>{model.name}</h3>
+          <p class="model-best-for">{model.bestFor}</p>
+          <ul class="model-features">
+            {model.features.map(feat => (
+              <li>
+                <svg class="check-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>{feat}</span>
+              </li>
+            ))}
+          </ul>
+          <a href="#contact" class={`btn ${model.popular ? 'btn-primary' : 'btn-outline'}`} data-analytics-cta={`Choose Model ${model.name}`}>
+            Inquire About This Model
+          </a>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Recent Insights Section -->
+  <section id="insights" class="section insights-section">
+    <div class="section-header flex-header">
+      <div>
+        <span class="section-tag">THOUGHT LEADERSHIP</span>
+        <h2>Engineering & Architecture Insights</h2>
+        <p>In-depth technical articles, architectural guides, and lessons learned from the field.</p>
+      </div>
+      <a href="/blog" class="all-link" data-analytics-cta="View all insights">View all articles &rarr;</a>
+    </div>
+
+    <div class="insights-grid">
+      {posts.map(post => (
+        <article class="insight-card">
+          <time datetime={post.data.date.toISOString()}>
+            {post.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
+          </time>
+          <h3>
+            <a href={`/blog/${post.id}`} data-analytics-post={post.data.title}>
+              {post.data.title}
+            </a>
+          </h3>
+          <p>{post.data.description}</p>
+          <div class="tags">
+            {post.data.tags.slice(0, 3).map(tag => (
+              <span class="tag">{tag}</span>
+            ))}
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <!-- Contact / CTA Section -->
+  <section id="contact" class="section contact-section">
+    <div class="contact-card">
+      <span class="section-tag-light">GET IN TOUCH</span>
+      <h2>Ready to Modernize Your Technology?</h2>
+      <p class="contact-intro">
+        Whether you are planning a cloud migration, re-architecting a mission-critical platform, or seeking an experienced technical advisor, let's connect for an introductory consultation.
+      </p>
+
+      <div class="contact-actions">
+        <a 
+          href="mailto:contact@faysalahmed.space?subject=IT%20Consulting%20Inquiry" 
+          class="btn btn-contact-primary"
+          data-analytics-cta="Email Consultation"
+        >
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          Send an Email Inquiry
+        </a>
+        <a 
+          href="https://www.linkedin.com/in/faysalahmedshohel/" 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          class="btn btn-contact-secondary"
+          data-analytics-cta="LinkedIn Profile"
+        >
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 8.76a1.6 1.6 0 1 0 0-3.2 1.6 1.6 0 0 0 0 3.2m1.4 9.74V9.93H5.06v8.57h2.8z"/></svg>
+          Connect on LinkedIn
+        </a>
+      </div>
+
+      <div class="contact-meta">
+        <span>⚡ Quick response within 24 business hours</span>
+        <span>🔒 Strict NDAs & confidentiality honored</span>
+        <span>🌐 Remote & worldwide availability</span>
+      </div>
+    </div>
   </section>
 </BlogLayout>
 
@@ -39,70 +294,508 @@ const posts = (await getCollection('blog'))
   document.querySelectorAll('[data-analytics-post]').forEach(el => {
     el.addEventListener('click', () => track('post_click', { post_title: el.dataset.analyticsPost, location: 'home' }));
   });
-  document.querySelector('[data-analytics-cta]')?.addEventListener('click', function () {
-    track('cta_click', { cta_label: this.dataset.analyticsCta, location: 'home' });
+  document.querySelectorAll('[data-analytics-cta]').forEach(el => {
+    el.addEventListener('click', () => track('cta_click', { cta_label: el.dataset.analyticsCta, location: 'home' }));
   });
 </script>
 
 <style>
-  .hero {
-    margin-bottom: 3rem;
+  /* Base Layout & Section Spacing */
+  .section {
+    padding: 3.5rem 0 1.5rem 0;
+    border-top: 1px solid var(--border);
   }
-  .hero h1 {
-    font-size: 2rem;
-    margin-bottom: 0.75rem;
+
+  .section-header {
+    margin-bottom: 2.25rem;
   }
-  .hero p {
+  .section-header h2 {
+    font-size: 1.85rem;
+    font-weight: 700;
+    color: var(--text);
+    margin: 0.35rem 0 0.5rem 0;
+    letter-spacing: -0.02em;
+  }
+  .section-header p {
     color: var(--muted);
-    max-width: 600px;
+    font-size: 1.05rem;
+    max-width: 680px;
   }
-  .recent-posts h2 {
-    font-size: 1.25rem;
+  .flex-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .section-tag {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: #0d8272;
+    background: rgba(15, 185, 162, 0.1);
+    padding: 0.25rem 0.65rem;
+    border-radius: 4px;
+    display: inline-block;
+  }
+
+  /* Hero Section */
+  .hero-section {
+    padding: 1.5rem 0 3.5rem 0;
+  }
+  .availability-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(16, 185, 129, 0.08);
+    color: #065f46;
+    border: 1px solid rgba(16, 185, 129, 0.25);
+    padding: 0.35rem 0.85rem;
+    border-radius: 999px;
+    font-size: 0.82rem;
+    font-weight: 600;
     margin-bottom: 1.5rem;
   }
-  .post-list {
+  .status-indicator {
+    width: 8px;
+    height: 8px;
+    background: #10b981;
+    border-radius: 50%;
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.3);
+  }
+  .hero-title {
+    font-size: 2.75rem;
+    font-weight: 800;
+    line-height: 1.2;
+    letter-spacing: -0.03em;
+    color: var(--text);
+    margin-bottom: 1.25rem;
+  }
+  .gradient-text {
+    background: linear-gradient(135deg, #0f766e 0%, #0284c7 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .hero-lead {
+    font-size: 1.15rem;
+    color: #475569;
+    line-height: 1.7;
+    max-width: 760px;
+    margin-bottom: 2rem;
+  }
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 3rem;
+  }
+
+  /* Buttons */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    padding: 0.8rem 1.4rem;
+    border-radius: 8px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.15s ease-in-out;
+    border: 1px solid transparent;
+  }
+  .btn-primary {
+    background: var(--text);
+    color: #ffffff !important;
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.15);
+  }
+  .btn-primary:hover {
+    background: #1e293b;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(15, 23, 42, 0.2);
+    text-decoration: none;
+  }
+  .btn-secondary {
+    background: #f1f5f9;
+    color: var(--text) !important;
+    border: 1px solid rgba(15, 23, 42, 0.08);
+  }
+  .btn-secondary:hover {
+    background: #e2e8f0;
+    text-decoration: none;
+  }
+  .btn-outline {
+    background: transparent;
+    color: var(--text) !important;
+    border: 1px solid rgba(15, 23, 42, 0.2);
+    width: 100%;
+    justify-content: center;
+  }
+  .btn-outline:hover {
+    background: rgba(15, 23, 42, 0.04);
+    text-decoration: none;
+  }
+
+  /* Stats Grid */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+  .stat-card {
+    background: #f8fafc;
+    border: 1px solid rgba(15, 23, 42, 0.06);
+    border-radius: 10px;
+    padding: 1rem 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+  .stat-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text);
+  }
+  .stat-subtitle {
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+
+  /* Services Grid */
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+    gap: 1.75rem;
+  }
+  .service-card {
+    background: #ffffff;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.85rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    box-shadow: 0 4px 20px rgba(15, 23, 42, 0.03);
+  }
+  .service-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 28px rgba(15, 23, 42, 0.08);
+    border-color: rgba(15, 185, 162, 0.35);
+  }
+  .service-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 8px;
+    background: rgba(15, 185, 162, 0.1);
+    color: #0f766e;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.25rem;
+  }
+  .service-card h3 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 0.65rem;
+  }
+  .service-desc {
+    font-size: 0.92rem;
+    color: var(--muted);
+    line-height: 1.6;
+    margin-bottom: 1.25rem;
+  }
+  .service-highlights {
     list-style: none;
     display: flex;
     flex-direction: column;
+    gap: 0.5rem;
+    border-top: 1px solid rgba(15, 23, 42, 0.05);
+    padding-top: 1rem;
+  }
+  .service-highlights li {
+    font-size: 0.85rem;
+    color: #334155;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    line-height: 1.45;
+  }
+  .check-icon {
+    color: #0f766e;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  /* Process Grid */
+  .process-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 1.5rem;
   }
-  .post-list article time {
-    display: block;
-    font-size: 0.85rem;
+  .process-card {
+    background: #f8fafc;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    position: relative;
+  }
+  .step-num {
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: rgba(15, 185, 162, 0.4);
+    line-height: 1;
+    margin-bottom: 0.75rem;
+  }
+  .process-card h3 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 0.5rem;
+  }
+  .process-card p {
+    font-size: 0.87rem;
     color: var(--muted);
-    margin-bottom: 0.25rem;
+    line-height: 1.55;
   }
-  .post-list article h3 {
-    font-size: 1.15rem;
+
+  /* Engagement Models */
+  .models-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+    align-items: stretch;
   }
-  .post-list article h3 a {
+  .model-card {
+    background: #ffffff;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.75rem;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    box-shadow: 0 4px 15px rgba(15, 23, 42, 0.03);
+  }
+  .model-card.featured {
+    border: 2px solid #0f766e;
+    box-shadow: 0 10px 30px rgba(15, 118, 110, 0.12);
+  }
+  .popular-badge {
+    position: absolute;
+    top: -12px;
+    left: 1.5rem;
+    background: #0f766e;
+    color: #ffffff;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .model-card h3 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 0.35rem;
+  }
+  .model-best-for {
+    font-size: 0.82rem;
+    color: var(--muted);
+    margin-bottom: 1.25rem;
+    min-height: 2.4rem;
+  }
+  .model-features {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    margin-bottom: 1.75rem;
+    flex: 1;
+    border-top: 1px solid rgba(15, 23, 42, 0.05);
+    padding-top: 1rem;
+  }
+  .model-features li {
+    font-size: 0.85rem;
+    color: #334155;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  /* Insights Grid */
+  .insights-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+    gap: 1.5rem;
+  }
+  .insight-card {
+    background: #ffffff;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    transition: border-color 0.15s ease;
+  }
+  .insight-card:hover {
+    border-color: rgba(15, 23, 42, 0.2);
+  }
+  .insight-card time {
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+  .insight-card h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    line-height: 1.35;
+  }
+  .insight-card h3 a {
     color: var(--text);
   }
-  .post-list article h3 a:hover {
-    color: var(--accent);
+  .insight-card h3 a:hover {
+    color: #0f766e;
   }
-  .post-list article p {
+  .insight-card p {
+    font-size: 0.88rem;
     color: var(--muted);
-    font-size: 0.9rem;
-    margin-top: 0.25rem;
+    line-height: 1.55;
+    flex: 1;
   }
   .tags {
     display: flex;
-    gap: 0.5rem;
+    gap: 0.4rem;
     margin-top: 0.5rem;
     flex-wrap: wrap;
   }
   .tag {
-    font-size: 0.75rem;
-    color: var(--muted);
-    background: rgba(2, 6, 23, 0.04);
-    padding: 0.25rem 0.6rem;
+    font-size: 0.72rem;
+    color: #475569;
+    background: #f1f5f9;
+    padding: 0.2rem 0.55rem;
     border-radius: 999px;
   }
-  .all-posts {
-    display: inline-block;
-    margin-top: 1.5rem;
-    font-size: 0.9rem;
+  .all-link {
+    font-size: 0.92rem;
     font-weight: 600;
+    color: #0f766e;
+    text-decoration: none;
+  }
+  .all-link:hover {
+    text-decoration: underline;
+  }
+
+  /* Contact Section */
+  .contact-section {
+    padding-top: 2.5rem;
+    padding-bottom: 2rem;
+  }
+  .contact-card {
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    color: #ffffff;
+    border-radius: 16px;
+    padding: 3rem 2.25rem;
+    text-align: center;
+    box-shadow: 0 16px 36px rgba(15, 23, 42, 0.18);
+  }
+  .section-tag-light {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: #38bdf8;
+    background: rgba(56, 189, 248, 0.12);
+    padding: 0.25rem 0.65rem;
+    border-radius: 4px;
+    display: inline-block;
+    margin-bottom: 1rem;
+  }
+  .contact-card h2 {
+    font-size: 2.25rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    letter-spacing: -0.02em;
+    color: #ffffff;
+  }
+  .contact-intro {
+    font-size: 1.05rem;
+    color: #cbd5e1;
+    max-width: 650px;
+    margin: 0 auto 2.25rem auto;
+    line-height: 1.6;
+  }
+  .contact-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1.25rem;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+  }
+  .btn-contact-primary {
+    background: #0ea5e9;
+    color: #ffffff !important;
+    font-weight: 600;
+    box-shadow: 0 4px 14px rgba(14, 165, 233, 0.4);
+  }
+  .btn-contact-primary:hover {
+    background: #0284c7;
+    transform: translateY(-1px);
+    text-decoration: none;
+  }
+  .btn-contact-secondary {
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff !important;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  .btn-contact-secondary:hover {
+    background: rgba(255, 255, 255, 0.18);
+    text-decoration: none;
+  }
+  .contact-meta {
+    display: flex;
+    justify-content: center;
+    gap: 1.75rem;
+    font-size: 0.8rem;
+    color: #94a3b8;
+    flex-wrap: wrap;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 1.5rem;
+  }
+
+  /* Responsive Adjustments */
+  @media (max-width: 768px) {
+    .hero-title {
+      font-size: 2.1rem;
+    }
+    .hero-lead {
+      font-size: 1rem;
+    }
+    .services-grid,
+    .insights-grid {
+      grid-template-columns: 1fr;
+    }
+    .contact-card {
+      padding: 2rem 1.25rem;
+    }
+    .contact-card h2 {
+      font-size: 1.65rem;
+    }
+    .stats-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .stats-grid {
+      grid-template-columns: 1fr;
+    }
+    .hero-actions {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    .btn {
+      justify-content: center;
+    }
   }
 </style>
