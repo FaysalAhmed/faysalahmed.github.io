@@ -127,50 +127,82 @@ const engagementModels = [
   <!-- Full-Width Hero Section -->
   <section class="hero-section">
     <div class="content-container">
-      <div class="hero-content">
-        <div class="availability-badge">
-          <span class="status-indicator"></span>
-          <span>Available for Consulting & Advisory Engagements</span>
+      <div class="hero-grid">
+        <div class="hero-content">
+          <div class="availability-badge">
+            <span class="status-indicator"></span>
+            <span>Available for Consulting & Advisory Engagements</span>
+          </div>
+
+          <h1 class="hero-title">
+            Strategic IT Consulting for <span class="gradient-text">Resilient, High-Performance Systems</span>
+          </h1>
+
+          <p class="hero-lead">
+            I partner with business executives and engineering teams to modernize legacy architectures, execute zero-downtime cloud migrations, fortify cybersecurity, and scale resilient software products.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#contact" class="btn btn-primary" data-analytics-cta="Book Consultation Hero">
+              Schedule a Consultation &rarr;
+            </a>
+            <a href="#services" class="btn btn-secondary" data-analytics-cta="View Services Hero">
+              Explore Services
+            </a>
+            <a href="/blog" class="btn btn-text" data-analytics-cta="Browse Blog Hero">
+              Read Technical Insights &rarr;
+            </a>
+          </div>
+
+          <div class="hero-trust-points">
+            <span>✓ 10+ Years Experience</span>
+            <span>✓ Vendor-Neutral</span>
+            <span>✓ Hands-on Advisory</span>
+          </div>
         </div>
 
-        <h1 class="hero-title">
-          Strategic IT Consulting for <span class="gradient-text">Resilient, High-Performance Systems</span>
-        </h1>
-
-        <p class="hero-lead">
-          I partner with business executives and engineering teams to modernize legacy architectures, execute zero-downtime cloud migrations, fortify cybersecurity, and scale resilient software products.
-        </p>
-
-        <div class="hero-actions">
-          <a href="#contact" class="btn btn-primary" data-analytics-cta="Book Consultation Hero">
-            Schedule a Consultation &rarr;
-          </a>
-          <a href="#services" class="btn btn-secondary" data-analytics-cta="View Services Hero">
-            Explore Services
-          </a>
-          <a href="/blog" class="btn btn-text" data-analytics-cta="Browse Blog Hero">
-            Read Technical Insights &rarr;
-          </a>
+        <div class="hero-image-col">
+          <div class="hero-image-card">
+            <div class="image-glow"></div>
+            <img 
+              src="/images/faysal-ahmed.jpg" 
+              alt="Faysal Ahmed - Senior IT Consultant & Systems Architect" 
+              class="hero-profile-img"
+              width="400"
+              height="480"
+              loading="eager"
+            />
+            <div class="hero-image-overlay">
+              <div class="overlay-info">
+                <strong>Faysal Ahmed</strong>
+                <span>Senior IT Consultant & Architect</span>
+              </div>
+              <div class="overlay-badge">
+                <span class="pulse-dot"></span>
+                <span>Active</span>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
 
-        <!-- Highlights Strip -->
-        <div class="stats-grid">
-          <div class="stat-card">
-            <span class="stat-title">Cloud & DevOps</span>
-            <span class="stat-subtitle">AWS · GCP · Kubernetes · Terraform · CI/CD</span>
-          </div>
-          <div class="stat-card">
-            <span class="stat-title">Enterprise Architecture</span>
-            <span class="stat-subtitle">Microservices · Event-Driven · High-Throughput</span>
-          </div>
-          <div class="stat-card">
-            <span class="stat-title">Cybersecurity & Trust</span>
-            <span class="stat-subtitle">Zero-Trust · Threat Modeling · DevSecOps</span>
-          </div>
-          <div class="stat-card">
-            <span class="stat-title">Technical Leadership</span>
-            <span class="stat-subtitle">Fractional CTO · Roadmapping · Due Diligence</span>
-          </div>
+      <!-- Highlights Strip -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <span class="stat-title">Cloud & DevOps</span>
+          <span class="stat-subtitle">AWS · GCP · Kubernetes · Terraform · CI/CD</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-title">Enterprise Architecture</span>
+          <span class="stat-subtitle">Microservices · Event-Driven · High-Throughput</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-title">Cybersecurity & Trust</span>
+          <span class="stat-subtitle">Zero-Trust · Threat Modeling · DevSecOps</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-title">Technical Leadership</span>
+          <span class="stat-subtitle">Fractional CTO · Roadmapping · Due Diligence</span>
         </div>
       </div>
     </div>
@@ -408,8 +440,15 @@ const engagementModels = [
                 #ffffff;
     border-bottom: 1px solid var(--border);
   }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.25fr 0.85fr;
+    gap: 3.5rem;
+    align-items: center;
+    margin-bottom: 4.5rem;
+  }
   .hero-content {
-    max-width: 1050px;
+    max-width: 100%;
   }
   .availability-badge {
     display: inline-flex;
@@ -432,12 +471,12 @@ const engagementModels = [
     box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.3);
   }
   .hero-title {
-    font-size: 3.5rem;
+    font-size: 3.25rem;
     font-weight: 850;
     line-height: 1.15;
     letter-spacing: -0.035em;
     color: var(--text);
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.35rem;
   }
   .gradient-text {
     background: linear-gradient(135deg, #0f766e 0%, #0284c7 100%);
@@ -445,18 +484,109 @@ const engagementModels = [
     -webkit-text-fill-color: transparent;
   }
   .hero-lead {
-    font-size: 1.25rem;
+    font-size: 1.2rem;
     color: #475569;
     line-height: 1.75;
     max-width: 860px;
-    margin-bottom: 2.5rem;
+    margin-bottom: 2rem;
   }
   .hero-actions {
     display: flex;
     gap: 1.25rem;
     align-items: center;
     flex-wrap: wrap;
-    margin-bottom: 4rem;
+    margin-bottom: 1.75rem;
+  }
+  .hero-trust-points {
+    display: flex;
+    gap: 1.5rem;
+    font-size: 0.88rem;
+    color: #64748b;
+    font-weight: 600;
+    flex-wrap: wrap;
+  }
+
+  /* Hero Image Column */
+  .hero-image-col {
+    display: flex;
+    justify-content: center;
+    position: relative;
+  }
+  .hero-image-card {
+    position: relative;
+    border-radius: 22px;
+    background: #ffffff;
+    padding: 8px;
+    box-shadow: 0 20px 45px rgba(15, 23, 42, 0.12), 0 4px 12px rgba(15, 23, 42, 0.06);
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    max-width: 380px;
+    width: 100%;
+  }
+  .image-glow {
+    position: absolute;
+    inset: -12px;
+    background: linear-gradient(135deg, rgba(14, 165, 233, 0.3), rgba(15, 185, 162, 0.25));
+    border-radius: 30px;
+    filter: blur(20px);
+    z-index: -1;
+    opacity: 0.75;
+  }
+  .hero-profile-img {
+    width: 100%;
+    height: 440px;
+    object-fit: cover;
+    object-position: center 25%;
+    border-radius: 16px;
+    display: block;
+  }
+  .hero-image-overlay {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+    background: rgba(15, 23, 42, 0.88);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: #ffffff;
+    padding: 0.85rem 1.15rem;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  }
+  .overlay-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+  .overlay-info strong {
+    font-size: 0.95rem;
+    color: #ffffff;
+    letter-spacing: -0.01em;
+  }
+  .overlay-info span {
+    font-size: 0.78rem;
+    color: #94a3b8;
+  }
+  .overlay-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: rgba(16, 185, 129, 0.15);
+    color: #34d399;
+    border: 1px solid rgba(16, 185, 129, 0.35);
+    padding: 0.25rem 0.6rem;
+    border-radius: 999px;
+    font-size: 0.72rem;
+    font-weight: 600;
+  }
+  .pulse-dot {
+    width: 6px;
+    height: 6px;
+    background: #10b981;
+    border-radius: 50%;
   }
 
   /* Buttons */
@@ -897,6 +1027,19 @@ const engagementModels = [
 
   /* Responsive Breakpoints */
   @media (max-width: 1024px) {
+    .hero-grid {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+    .hero-image-col {
+      order: -1;
+    }
+    .hero-image-card {
+      max-width: 320px;
+    }
+    .hero-profile-img {
+      height: 380px;
+    }
     .hero-title {
       font-size: 2.75rem;
     }
@@ -943,6 +1086,12 @@ const engagementModels = [
   }
 
   @media (max-width: 480px) {
+    .hero-image-card {
+      max-width: 280px;
+    }
+    .hero-profile-img {
+      height: 330px;
+    }
     .hero-actions {
       flex-direction: column;
       align-items: stretch;
